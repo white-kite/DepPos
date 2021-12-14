@@ -61,8 +61,8 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	private DepMapper depDAO;
 
 	/** ID Generation */
-	@Resource(name = "egovIdGnrService")
-	private EgovIdGnrService egovIdGnrService;
+	@Resource(name = "DepCodeGnrService")
+	private EgovIdGnrService depcodeGnrService;
 
 	/**
 	 * 글을 등록한다.
@@ -75,7 +75,7 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 		LOGGER.debug(vo.toString());
 
 		/** ID Generation Service */
-		String id = egovIdGnrService.getNextStringId();
+		String id = depcodeGnrService.getNextStringId();
 		vo.setDepCode(id);
 		LOGGER.debug(vo.toString());
 

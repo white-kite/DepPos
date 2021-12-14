@@ -22,9 +22,7 @@
     
     <formset>
         <form name="depVO">
-        	<field property="depCode" depends="required">
-        		<arg0 key="부서코드" />
-			</field>
+        	
 			<field property="depName" depends="required">
         		<arg0 key="부서명" />
 			</field>

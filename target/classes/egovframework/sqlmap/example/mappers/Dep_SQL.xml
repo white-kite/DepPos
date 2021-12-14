@@ -57,7 +57,7 @@
 	<select id="selectDep" resultMap="depVO">
 
 			SELECT
-				DEP_CODE, DEP_NAME, DEP_UPDE, DEP_USE, DEP_REGM, DEP_REGD
+				DEP_CODE, DEP_NAME, DEP_UPDE, DEP_USE, DEP_NOTE, DEP_REGM, DEP_REGD
 			FROM DEP
 			WHERE DEP_CODE=#{depCode}
 

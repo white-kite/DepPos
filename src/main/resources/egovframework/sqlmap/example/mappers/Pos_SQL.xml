@@ -57,7 +57,7 @@
 	<select id="selectPos" resultMap="posVO">
 
 			SELECT
-				POS_CODE, POS_NAME, POS_USE, POS_REGM, POS_REGD
+				POS_CODE, POS_NAME, POS_USE, POS_NOTE, POS_REGM, POS_REGD
 			FROM POS
 			WHERE POS_CODE=#{posCode}
 

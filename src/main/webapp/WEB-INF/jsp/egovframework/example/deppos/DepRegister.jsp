@@ -92,8 +92,8 @@
     		<tr>
     			<td class="tbtd_caption"><label for="depName">부서코드</label></td>
     			<td class="tbtd_content">
-    				<form:input path="depCode" maxlength="30" cssClass="txt"/>
-    				&nbsp;<form:errors path="depCode" />
+    				<form:input path="depCode" maxlength="30" cssClass="essentiality" readonly="true" />
+    				&nbsp;
     			</td>
     		</tr>
     		<tr>
@@ -104,9 +104,16 @@
     			</td>
     		</tr>
     		<tr>
-    			<td class="tbtd_caption"><label for="depCode">상위부서코드</label></td>
+    			<td class="tbtd_caption"><label for="depUpde">상위부서코드</label></td>
     			<td class="tbtd_content">
-    				<form:textarea path="depUpde" rows="5" cols="58" />&nbsp;<form:errors path="depUpde" />
+    				<form:input path="depUpde" maxlength="30" cssClass="txt"/>
+    				&nbsp;<form:errors path="depUpde" />
+    			</td>
+    		</tr>
+    		<tr>
+    			<td class="tbtd_caption"><label for="depNote">비고</label></td>
+    			<td class="tbtd_content">
+    				<form:textarea path="depNote" rows="5" cols="58" />&nbsp;<form:errors path="depNote" />
                 </td>
     		</tr>
     		<tr>
@@ -149,7 +156,7 @@
     			</c:if>
     			<li>
                     <span class="btn_blue_l">
-                        <a href="javascript:document.detailForm.reset();"><spring:message code="button.reset" /></a>
+                        <a href="javascript:document.detailForm.reset();">초기화</a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
