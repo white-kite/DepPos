@@ -34,7 +34,7 @@
     <validator:javascript formName="depVO" staticJavascript="false" xhtml="true" cdata="false"/>
     
     <script type="text/javaScript" language="javascript" defer="defer">
-        <!--
+        
         /* 글 목록 화면 function */
         function fn_egov_selectList() {
            	document.detailForm.action = "<c:url value='/DepList.do'/>";
@@ -50,7 +50,7 @@
         /* 글 등록 function */
         function fn_egov_save() {
         	frm = document.detailForm;
-        	if(!validateSampleVO(frm)){
+        	if(!validateDepVO(frm)){
                 return;
             }else{
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addDep.do' : '/updateDep.do'}"/>";
@@ -58,7 +58,7 @@
             }
         }
         
-        -->
+       
     </script>
 </head>
 <body style="text-align:center; margin:0 auto; display:inline; padding-top:100px;">
@@ -90,6 +90,13 @@
         		</tr>
     		</c:if>
     		<tr>
+    			<td class="tbtd_caption"><label for="depName">부서코드</label></td>
+    			<td class="tbtd_content">
+    				<form:input path="depCode" maxlength="30" cssClass="txt"/>
+    				&nbsp;<form:errors path="depCode" />
+    			</td>
+    		</tr>
+    		<tr>
     			<td class="tbtd_caption"><label for="depName">부서명</label></td>
     			<td class="tbtd_content">
     				<form:input path="depName" maxlength="30" cssClass="txt"/>
@@ -99,7 +106,7 @@
     		<tr>
     			<td class="tbtd_caption"><label for="depCode">상위부서코드</label></td>
     			<td class="tbtd_content">
-    				<form:textarea path="depCode" rows="5" cols="58" />&nbsp;<form:errors path="depCode" />
+    				<form:textarea path="depUpde" rows="5" cols="58" />&nbsp;<form:errors path="depUpde" />
                 </td>
     		</tr>
     		<tr>
@@ -119,15 +126,15 @@
     		<ul>
     			<li>
                     <span class="btn_blue_l">
-                        <a href="javascript:fn_egov_selectList();"><spring:message code="button.list" /></a>
+                        <a href="javascript:fn_egov_selectList();">목록</a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
     			<li>
                     <span class="btn_blue_l">
                         <a href="javascript:fn_egov_save();">
-                            <c:if test="${registerFlag == 'create'}"><spring:message code="button.create" /></c:if>
-                            <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if>
+                            <c:if test="${registerFlag == 'create'}">등록</c:if>
+                            <c:if test="${registerFlag == 'modify'}">수정</c:if>
                         </a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
@@ -135,7 +142,7 @@
     			<c:if test="${registerFlag == 'modify'}">
                     <li>
                         <span class="btn_blue_l">
-                            <a href="javascript:fn_egov_delete();"><spring:message code="button.delete" /></a>
+                            <a href="javascript:fn_egov_delete();">삭제</a>
                             <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                         </span>
                     </li>
