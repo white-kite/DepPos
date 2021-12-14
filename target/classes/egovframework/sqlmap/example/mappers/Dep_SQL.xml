@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.DepMapper">
+
+	<resultMap id="depVO" type="egovframework.example.sample.service.DepVO">
+		<result property="depCode" column="dep_code"/>
+		<result property="depName" column="dep_name"/>
+		<result property="depUpde" column="dep_upde"/>
+		<result property="depUse" column="dep_use"/>
+		<result property="depNote" column="dep_note"/>
+		<result property="depRegm" column="dep_regm"/>
+		<result property="depRegd" column="dep_regd"/>
+		
+	</resultMap>
+
+	<insert id="insertDep" parameterType="depVO">
+
+			INSERT INTO DEP
+				( DEP_CODE
+				  , DEP_NAME
+				  , DEP_UPDE
+				  , DEP_USE
+				  , DEP_NOTE
+				  , DEP_REGM
+				  , DEP_REGD )
+			VALUES ( #{depCode}
+				  , #{depName}
+				  , #{depUpde}
+				  , #{depUse}
+				  , #{depNote}
+				  , #{depRegm}
+				  , SYSDATE() )
+
+	</insert>
+
+	<update id="updateDep">
+
+			UPDATE DEP
+			SET  DEP_CODE=#{depCode}
+				, DEP_NAME=#{depName}
+				, DEP_UPDE=#{depUpde}
+				, DEP_USE=#{depUse}
+				, DEP_NOTE=#{depNote}
+				, DEP_REGM=#{depRegm}
+				, DEP_REGD=SYSDATE()
+				  WHERE DEP_CODE=#{depCode}
+
+	</update>
+
+	<delete id="deleteDep">
+
+			DELETE FROM DEP
+			WHERE DEP_CODE=#{depCode}
+
+	</delete>
+
+	<select id="selectDep" resultMap="depVO">
+
+			SELECT
+				DEP_CODE, DEP_NAME, DEP_UPDE, DEP_USE, DEP_REGM, DEP_REGD
+			FROM DEP
+			WHERE DEP_CODE=#{depCode}
+
+	</select>
+
+	<select id="selectDepList" parameterType="searchVO" resultType="egovMap">
+
+			SELECT
+				DEP_CODE, DEP_NAME, DEP_UPDE, DEP_USE
+			FROM DEP
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND	DEP_CODE LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	DEP_NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+			ORDER BY DEP_CODE ASC
+			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+	<select id="selectDepListTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM DEP
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND DEP_CODE LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	DEP_NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</select>
+
+</mapper>
