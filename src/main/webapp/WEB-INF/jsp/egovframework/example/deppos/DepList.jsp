@@ -67,6 +67,11 @@
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><spring:message code="list.sample" /></li>
         		</ul>
         	</div>
+        	
+        	<a href="/DepPos/egovSampleList.do">전자정부 프레임워크 목록 조회</a>
+        	<a href="/DepPos/DepList.do">부서 목록 조회</a>
+        	<a href="/DepPos/PosList.do">직급 목록 조회</a> 
+        	
         	<!-- // 타이틀 -->
         	<div id="search">
         		<ul>

@@ -79,6 +79,8 @@ public class DepController {
 	@RequestMapping(value = "/DepList.do")
 	public String selectDepList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 
+		System.err.print("컨트롤러 실행");
+		
 		/** EgovPropertyService. */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
 		searchVO.setPageSize(propertiesService.getInt("pageSize"));
@@ -150,7 +152,7 @@ public class DepController {
 	 * @exception Exception
 	 */
 	@RequestMapping("/updateDepView.do")
-	public String updateDepView(@RequestParam("selectedId") String id, @ModelAttribute("depVO") SampleDefaultVO searchVO, Model model) throws Exception {
+	public String updateDepView(@RequestParam("selectedId") String id, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
 		DepVO depVO = new DepVO();
 		depVO.setDepCode(id);
 		// 변수명은 CoC 에 따라 depVO

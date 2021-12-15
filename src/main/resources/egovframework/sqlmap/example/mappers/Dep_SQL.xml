@@ -41,7 +41,7 @@
 				, DEP_UPDE=#{depUpde}
 				, DEP_USE=#{depUse}
 				, DEP_NOTE=#{depNote}
-				, DEP_REGM=#{depRegm}
+				
 				, DEP_REGD=SYSDATE()
 				  WHERE DEP_CODE=#{depCode}
 

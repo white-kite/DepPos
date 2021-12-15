@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring"    uri="http://www.springframework.org/tags"%>
 <%
   /**
-  * @Class Name : egovSampleRegister.jsp
+  * @Class Name : DepRegister.jsp
   * @Description : Sample Register 화면
   * @Modification Information
   *
@@ -24,7 +24,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <c:set var="registerFlag" value="${empty depVO.depCode ? 'create' : 'modify'}"/>
-    <title>Sample <c:if test="${registerFlag == 'create'}">생성</c:if>
+    <title>Dep <c:if test="${registerFlag == 'create'}">생성</c:if>
                   <c:if test="${registerFlag == 'modify'}">수정</c:if>
     </title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
@@ -36,19 +36,19 @@
     <script type="text/javaScript" language="javascript" defer="defer">
         
         /* 글 목록 화면 function */
-        function fn_egov_selectList() {
+        function fn_dep_selectList() {
            	document.detailForm.action = "<c:url value='/DepList.do'/>";
            	document.detailForm.submit();
         }
         
         /* 글 삭제 function */
-        function fn_egov_delete() {
+        function fn_dep_delete() {
            	document.detailForm.action = "<c:url value='/deleteDep.do'/>";
            	document.detailForm.submit();
         }
         
         /* 글 등록 function */
-        function fn_egov_save() {
+        function fn_dep_save() {
         	frm = document.detailForm;
         	if(!validateDepVO(frm)){
                 return;
@@ -81,14 +81,14 @@
     			<col width="150"/>
     			<col width="?"/>
     		</colgroup>
-    		<c:if test="${registerFlag == 'modify'}">
+    		<%-- <c:if test="${registerFlag == 'modify'}">
         		<tr>
         			<td class="tbtd_caption"><label for="depCode">부서코드</label></td>
         			<td class="tbtd_content">
         				<form:input path="depCode" cssClass="essentiality" maxlength="10" readonly="true" />
         			</td>
         		</tr>
-    		</c:if>
+    		</c:if> --%>
     		<tr>
     			<td class="tbtd_caption"><label for="depName">부서코드</label></td>
     			<td class="tbtd_content">
@@ -107,13 +107,13 @@
     			<td class="tbtd_caption"><label for="depUpde">상위부서코드</label></td>
     			<td class="tbtd_content">
     				<form:input path="depUpde" maxlength="30" cssClass="txt"/>
-    				&nbsp;<form:errors path="depUpde" />
+    				&nbsp;
     			</td>
     		</tr>
     		<tr>
     			<td class="tbtd_caption"><label for="depNote">비고</label></td>
     			<td class="tbtd_content">
-    				<form:textarea path="depNote" rows="5" cols="58" />&nbsp;<form:errors path="depNote" />
+    				<form:textarea path="depNote" rows="5" cols="58" />&nbsp;
                 </td>
     		</tr>
     		<tr>
@@ -133,13 +133,13 @@
     		<ul>
     			<li>
                     <span class="btn_blue_l">
-                        <a href="javascript:fn_egov_selectList();">목록</a>
+                        <a href="javascript:fn_dep_selectList();">목록</a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
     			<li>
                     <span class="btn_blue_l">
-                        <a href="javascript:fn_egov_save();">
+                        <a href="javascript:fn_dep_save();">
                             <c:if test="${registerFlag == 'create'}">등록</c:if>
                             <c:if test="${registerFlag == 'modify'}">수정</c:if>
                         </a>
@@ -149,7 +149,7 @@
     			<c:if test="${registerFlag == 'modify'}">
                     <li>
                         <span class="btn_blue_l">
-                            <a href="javascript:fn_egov_delete();">삭제</a>
+                            <a href="javascript:fn_dep_delete();">삭제</a>
                             <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                         </span>
                     </li>
