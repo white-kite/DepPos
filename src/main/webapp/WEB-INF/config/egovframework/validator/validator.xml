@@ -28,5 +28,14 @@
 			</field>
         </form>
     </formset>
+    
+    <formset>
+        <form name="posVO">
+        	
+			<field property="posName" depends="required">
+        		<arg0 key="직급명" />
+			</field>
+        </form>
+    </formset>
 
 </form-validation>

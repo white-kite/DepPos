@@ -79,6 +79,8 @@ public class PosController {
 	@RequestMapping(value = "/PosList.do")
 	public String selectPosList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 
+		System.err.print("컨트롤러 실행");
+		
 		/** EgovPropertyService. */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
 		searchVO.setPageSize(propertiesService.getInt("pageSize"));
@@ -150,7 +152,7 @@ public class PosController {
 	 * @exception Exception
 	 */
 	@RequestMapping("/updatePosView.do")
-	public String updatePosView(@RequestParam("selectedId") String id, @ModelAttribute("posVO") SampleDefaultVO searchVO, Model model) throws Exception {
+	public String updatePosView(@RequestParam("selectedId") String id, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
 		PosVO posVO = new PosVO();
 		posVO.setPosCode(id);
 		// 변수명은 CoC 에 따라 posVO

@@ -61,8 +61,8 @@ public class PosServiceImpl extends EgovAbstractServiceImpl implements PosServic
 	private PosMapper posDAO;
 
 	/** ID Generation */
-	@Resource(name = "egovIdGnrService")
-	private EgovIdGnrService egovIdGnrService;
+	@Resource(name = "PosCodeGnrService")
+	private EgovIdGnrService poscodeGnrService;
 
 	/**
 	 * 글을 등록한다.
@@ -75,7 +75,7 @@ public class PosServiceImpl extends EgovAbstractServiceImpl implements PosServic
 		LOGGER.debug(vo.toString());
 
 		/** ID Generation Service */
-		String id = egovIdGnrService.getNextStringId();
+		String id = poscodeGnrService.getNextStringId();
 		vo.setPosCode(id);
 		LOGGER.debug(vo.toString());
 

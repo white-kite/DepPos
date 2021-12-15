@@ -52,6 +52,12 @@ public class PosVO extends SampleDefaultVO {
 	
 	/** 직책등록일시 */
 	private String posRegd;
+	
+	/** 직책수정자 */
+	private String posUptm;
+	
+	/** 직책수정일시 */
+	private String posUptd;
 
 
 
@@ -101,6 +107,22 @@ public class PosVO extends SampleDefaultVO {
 
 	public void setPosRegd(String posRegd) {
 		this.posRegd = posRegd;
+	}
+
+	public String getPosUptm() {
+		return posUptm;
+	}
+
+	public void setPosUptm(String posUptm) {
+		this.posUptm = posUptm;
+	}
+
+	public String getPosUptd() {
+		return posUptd;
+	}
+
+	public void setPosUptd(String posUptd) {
+		this.posUptd = posUptd;
 	}
 
 

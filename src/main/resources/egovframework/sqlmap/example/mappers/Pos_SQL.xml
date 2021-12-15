@@ -10,6 +10,8 @@
 		<result property="posNote" column="pos_note"/>
 		<result property="posRegm" column="pos_regm"/>
 		<result property="posRegd" column="pos_regd"/>
+		<result property="posRegm" column="pos_uptm"/>
+		<result property="posRegd" column="pos_uotd"/>
 		
 	</resultMap>
 
@@ -41,8 +43,8 @@
 				
 				, POS_USE=#{posUse}
 				, POS_NOTE=#{posNote}
-				, POS_REGM=#{posUptm}
-				, POS_REGD=SYSDATE()
+				, POS_UPTM=#{posUptm}
+				, POS_UPTD=SYSDATE()
 				  WHERE POS_CODE=#{posCode}
 
 	</update>
@@ -66,7 +68,7 @@
 	<select id="selectPosList" parameterType="searchVO" resultType="egovMap">
 
 			SELECT
-				POS_CODE, POS_NAME, POS_UPDE, POS_USE
+				POS_CODE, POS_NAME, POS_USE
 			FROM POS
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">

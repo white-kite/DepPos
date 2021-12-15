@@ -10,7 +10,8 @@
 		<result property="depNote" column="dep_note"/>
 		<result property="depRegm" column="dep_regm"/>
 		<result property="depRegd" column="dep_regd"/>
-		
+		<result property="depUptm" column="dep_uptm"/>
+		<result property="depUptd" column="dep_uptd"/>
 	</resultMap>
 
 	<insert id="insertDep" parameterType="depVO">
@@ -41,8 +42,8 @@
 				, DEP_UPDE=#{depUpde}
 				, DEP_USE=#{depUse}
 				, DEP_NOTE=#{depNote}
-				
-				, DEP_REGD=SYSDATE()
+				, DEP_UPTM=#{depUptm}
+				, DEP_UPTD=SYSDATE()
 				  WHERE DEP_CODE=#{depCode}
 
 	</update>
