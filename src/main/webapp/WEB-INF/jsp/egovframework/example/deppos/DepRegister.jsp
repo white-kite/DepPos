@@ -119,10 +119,13 @@
     		<tr>
     			<td class="tbtd_caption"><label for="depUse">사용여부</label></td>
     			<td class="tbtd_content">
-    				<form:select path="depUse" cssClass="use">
+    				<form:radiobutton path="depUse" value="Y"/>&nbsp 사용 		
+    				<form:radiobutton path="depUse" value="N"/>&nbsp 미사용 
+    				
+    				<%-- <form:select path="depUse" cssClass="use">
     					<form:option value="Y" label="Yes" />
     					<form:option value="N" label="No" />
-    				</form:select>
+    				</form:select> --%>
     			</td>
     		</tr>
     		
