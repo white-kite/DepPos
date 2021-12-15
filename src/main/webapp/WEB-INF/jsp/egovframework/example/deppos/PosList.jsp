@@ -115,7 +115,7 @@
         			</tr>
         			<c:forEach var="result" items="${resultList}" varStatus="status">
             			<tr>
-            				<td align="center" class="listtd"><c:out value="${paginationInfo.totalRecordCount+1 - ((searchVO.pageIndex-1) * searchVO.pageSize + status.count)}"/></td>
+            				<td align="center" class="listtd"><c:out value="${(searchVO.pageIndex-1) * searchVO.pageSize + status.count}"/></td>
             				<td align="center" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.posCode}"/>')"><c:out value="${result.posCode}"/></a></td>
             				<td align="left" class="listtd"><c:out value="${result.posName}"/>&nbsp;</td>
             				
