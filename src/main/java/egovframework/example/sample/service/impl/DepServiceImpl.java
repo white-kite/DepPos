@@ -140,5 +140,12 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public int selectDepListTotCnt(SampleDefaultVO searchVO) {
 		return depDAO.selectDepListTotCnt(searchVO);
 	}
+	
+	/**
+	 * 상위부서명 입력 셀렉트 폼에 넣을 부서를 조회한다.
+	 */
+	public List<?> catchDepList() throws Exception {
+		return depDAO.catchDepList();
+	}
 
 }

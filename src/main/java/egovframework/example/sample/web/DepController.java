@@ -79,7 +79,7 @@ public class DepController {
 	@RequestMapping(value = "/DepList.do")
 	public String selectDepList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 
-		System.err.print("컨트롤러 실행");
+		
 		
 		/** EgovPropertyService. */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
@@ -129,7 +129,7 @@ public class DepController {
 	@RequestMapping(value = "/addDep.do", method = RequestMethod.POST)
 	public String addDep(@ModelAttribute("searchVO") SampleDefaultVO searchVO, DepVO depVO, BindingResult bindingResult, Model model, SessionStatus status)
 			throws Exception {
-
+		System.out.println("addDep.do에 POST에 들어왔다.");
 		// Server-Side Validation
 		beanValidator.validate(depVO, bindingResult);
 
@@ -138,6 +138,14 @@ public class DepController {
 			return "deppos/DepRegister";
 		}
 
+		List<?> catchDepList = depService.catchDepList();
+		System.out.println("catchDepList===="+catchDepList);
+		model.addAttribute("catchDepList", catchDepList);
+		
+		System.err.println("catchDepList===="+catchDepList.size());
+
+		
+		
 		depService.insertDep(depVO);
 		status.setComplete();
 		return "forward:/DepList.do";
@@ -156,7 +164,7 @@ public class DepController {
 		DepVO depVO = new DepVO();
 		depVO.setDepCode(id);
 		// 변수명은 CoC 에 따라 depVO
-		model.addAttribute(selectDep(depVO, searchVO));
+		model.addAttribute(selectDep(depVO, searchVO, model));
 		return "deppos/DepRegister";
 	}
 
@@ -168,7 +176,18 @@ public class DepController {
 	 * @return @ModelAttribute("depVO") - 조회한 정보
 	 * @exception Exception
 	 */
-	public DepVO selectDep(DepVO depVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
+	public DepVO selectDep(DepVO depVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+
+		model.addAttribute("depVO", depVO);
+	
+		List<?> catchDepList = depService.catchDepList();
+		System.out.println("catchDepList===="+catchDepList);
+		model.addAttribute("catchDepList", catchDepList);
+		
+		System.err.println("catchDepList===="+catchDepList.size());
+
+		
+		
 		return depService.selectDep(depVO);
 	}
 

@@ -104,4 +104,10 @@ public class DepDAO extends EgovAbstractDAO {
 		return (Integer) select("depDAO.selectDepListTotCnt", searchVO);
 	}
 
+	/**
+	 * 상위부서명 입력 셀렉트 폼에 넣을 부서를 조회한다.
+	 */
+	public List<?> catchDepList(DepVO vo) throws Exception{
+		return list("depDAO.catchDepList", vo);
+	}
 }

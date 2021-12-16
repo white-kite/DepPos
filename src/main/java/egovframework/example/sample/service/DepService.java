@@ -82,5 +82,10 @@ public interface DepService {
 	 * @exception
 	 */
 	int selectDepListTotCnt(SampleDefaultVO searchVO);
+	
+	/**
+	 * 상위부서명 입력 셀렉트 폼에 넣을 부서를 조회한다.
+	 */
+	List<?> catchDepList() throws Exception;
 
 }
