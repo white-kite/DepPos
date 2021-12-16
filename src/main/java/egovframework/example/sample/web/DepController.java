@@ -15,14 +15,8 @@
  */
 package egovframework.example.sample.web;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import egovframework.example.sample.service.DepService;
-import egovframework.example.sample.service.SampleDefaultVO;
-import egovframework.example.sample.service.DepVO;
-
-import egovframework.rte.fdl.property.EgovPropertyService;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 import javax.annotation.Resource;
 
@@ -36,6 +30,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
+
+import egovframework.example.sample.service.DepService;
+import egovframework.example.sample.service.DepVO;
+import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.rte.fdl.property.EgovPropertyService;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 /**
  * @Class Name : EgovSampleController.java
@@ -79,7 +79,6 @@ public class DepController {
 	@RequestMapping(value = "/DepList.do")
 	public String selectDepList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 
-		System.err.print("컨트롤러 실행");
 		
 		/** EgovPropertyService. */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
@@ -97,6 +96,8 @@ public class DepController {
 
 		List<?> depList = depService.selectDepList(searchVO);
 		model.addAttribute("resultList", depList);
+		
+		System.out.println("depList === "+depList);
 
 		int totCnt = depService.selectDepListTotCnt(searchVO);
 		paginationInfo.setTotalRecordCount(totCnt);
@@ -115,6 +116,16 @@ public class DepController {
 	@RequestMapping(value = "/addDep.do", method = RequestMethod.GET)
 	public String addDepView(@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
 		model.addAttribute("depVO", new DepVO());
+		
+		
+		List<?> catchDepList = depService.catchDepList();
+		model.addAttribute("catchDepList", catchDepList);
+		System.out.println("catchDepList===="+((List<DepVO>)catchDepList).get(0).getDepName());
+		
+		/*List<?>.catchDepList = depService.catchDepList(DepVO);
+		model.addAttribute("catchDepList", new catchDepList(DepVO));
+		System.out.println("catchDepList===="+catchDepList);*/
+		
 		return "deppos/DepRegister";
 	}
 
@@ -134,6 +145,7 @@ public class DepController {
 		beanValidator.validate(depVO, bindingResult);
 
 		if (bindingResult.hasErrors()) {
+			
 			model.addAttribute("depVO", depVO);
 			return "deppos/DepRegister";
 		}
@@ -210,5 +222,10 @@ public class DepController {
 		status.setComplete();
 		return "forward:/DepList.do";
 	}
+	
+	/**
+	 * 부서목록을 불러온다.
+	 */
+		
 
 }

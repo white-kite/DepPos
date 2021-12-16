@@ -25,7 +25,7 @@
 	</bean>
 	<bean name="mixPrefixDep" class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl">
 		<property name="prefix"   value="DEP_" />
-		<property name="cipers"   value="1" />
+		<property name="cipers"   value="3" />
 		<property name="fillChar" value="0" />
 	</bean>	
 	
@@ -39,7 +39,7 @@
 	</bean>
 	<bean name="mixPrefixPos" class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl">
 		<property name="prefix"   value="POS_" />
-		<property name="cipers"   value="1" />
+		<property name="cipers"   value="3" />
 		<property name="fillChar" value="0" />
 	</bean>	
 			

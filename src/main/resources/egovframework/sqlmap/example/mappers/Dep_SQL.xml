@@ -100,5 +100,11 @@
 				</choose>
 			</if>
 	</select>
+	
+	
+	<select id="catchDepList" resultMap="depVO">
+		SELECT *
+		FROM DEP
+	</select>
 
 </mapper>

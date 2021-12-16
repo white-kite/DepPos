@@ -106,7 +106,25 @@
     		<tr>
     			<td class="tbtd_caption"><label for="depUpde">상위부서코드</label></td>
     			<td class="tbtd_content">
-    				<form:input path="depUpde" maxlength="30" cssClass="txt"/>
+    			
+    				<%-- <c:forEach items="${getDepUpde}" var="depUpde">
+    				<form:select path="depUpde" name ="selectBox" id="selectBox" class="select_depUpde">
+    				
+    				<option value="${resultsList.depCode}">${resultList.depCode}</option>
+    			
+    				</form:select> --%>
+    				
+    				
+    				<c:forEach var="vo" items="${catchDepList}">
+    				${vo.depName}
+    				</c:forEach>
+    				<form:select path="depUpde" id="catchDepList">
+    				<c:forEach items="${catchDepList}" var="catchDep">
+    				<form:option value="${catchDep.depName}"><c:out value="${catchDep.depName}"/></form:option>
+    				</c:forEach>
+    				</form:select>
+    				
+    				<%-- <form:input path="depUpde" maxlength="30" cssClass="txt"/> --%>
     				&nbsp;
     			</td>
     		</tr>
@@ -119,8 +137,8 @@
     		<tr>
     			<td class="tbtd_caption"><label for="depUse">사용여부</label></td>
     			<td class="tbtd_content">
-    				<form:radiobutton path="depUse" value="Y"/>&nbsp 사용 		
-    				<form:radiobutton path="depUse" value="N"/>&nbsp 미사용 
+    				<form:radiobutton path="depUse" value="Y"/>&nbsp; 사용 		
+    				<form:radiobutton path="depUse" value="N"/>&nbsp; 미사용 
     				
     				<%-- <form:select path="depUse" cssClass="use">
     					<form:option value="Y" label="Yes" />

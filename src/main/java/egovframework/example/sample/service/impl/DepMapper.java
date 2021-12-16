@@ -87,5 +87,10 @@ public interface DepMapper {
 	 * @exception
 	 */
 	int selectDepListTotCnt(SampleDefaultVO searchVO);
+	
+	/**
+	 * 상위부서명 입력 셀렉트 폼에 넣을 부서을 조회한다. 
+	 */
+	List<?> catchDepList() throws Exception;
 
 }
