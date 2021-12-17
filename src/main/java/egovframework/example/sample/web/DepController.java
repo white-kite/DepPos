@@ -133,16 +133,16 @@ public class DepController {
 		// Server-Side Validation
 		beanValidator.validate(depVO, bindingResult);
 
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("depVO", depVO);
-			return "deppos/DepRegister";
-		}
-
 		List<?> catchDepList = depService.catchDepList();
 		System.out.println("catchDepList===="+catchDepList);
 		model.addAttribute("catchDepList", catchDepList);
 		
 		System.err.println("catchDepList===="+catchDepList.size());
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("depVO", depVO);
+			return "deppos/DepRegister";
+		}
 
 		
 		
@@ -177,7 +177,7 @@ public class DepController {
 	 * @exception Exception
 	 */
 	public DepVO selectDep(DepVO depVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
-
+		System.out.print("selectDepVO에 들어왔다.");
 		model.addAttribute("depVO", depVO);
 	
 		List<?> catchDepList = depService.catchDepList();

@@ -73,10 +73,13 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
 		            <when test="searchCondition == 0">
-						AND	DEP_CODE LIKE '%' || #{searchKeyword} || '%'
+						AND	DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 		            <when test="searchCondition == 1">
-						AND	DEP_NAME LIKE '%' || #{searchKeyword} || '%'
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+					</when>
+					<when test="searchCondition == 2">
+						AND	DEP_USE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 				</choose>
 			</if>
@@ -92,10 +95,13 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
 		            <when test="searchCondition == 0">
-						AND DEP_CODE LIKE '%' || #{searchKeyword} || '%'
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 		            <when test="searchCondition == 1">
-						AND	DEP_NAME LIKE '%' || #{searchKeyword} || '%'
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+					</when>
+					<when test="searchCondition == 2">
+						AND	DEP_USE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 				</choose>
 			</if>

@@ -23,7 +23,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><spring:message code="title.sample" /></title>
+    <title>직급목록 조회</title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
         
@@ -64,13 +64,11 @@
         	<!-- 타이틀 -->
         	<div id="title">
         		<ul>
-        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><spring:message code="list.sample" /></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepList.do">부서 목록 조회</a></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/egovSampleList.do">샘플 목록 조회</a></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/PosList.do">직급 목록 조회</a></li>
         		</ul>
         	</div>
-        	
-        	<a href="/DepPos/egovSampleList.do">전자정부 프레임워크 목록 조회</a>
-        	<a href="/DepPos/DepList.do">부서 목록 조회</a>
-        	<a href="/DepPos/PosList.do">직급 목록 조회</a> 
         	
         	<!-- // 타이틀 -->
         	<div id="search">
@@ -78,8 +76,9 @@
         			<li>
         			    <label for="searchCondition" style="visibility:hidden;"><spring:message code="search.choose" /></label>
         				<form:select path="searchCondition" cssClass="use">
-        					<form:option value="1" label="posCode" />
-        					<form:option value="0" label="posName" />
+        					<form:option value="1" label="직급코드" />
+        					<form:option value="0" label="직급명" />
+        					<form:option value="3" label="사용여부" />
         				</form:select>
         			</li>
         			<li><label for="searchKeyword" style="visibility:hidden;display:none;"><spring:message code="search.keyword" /></label>

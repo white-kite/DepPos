@@ -24,7 +24,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <c:set var="registerFlag" value="${empty posVO.posCode ? 'create' : 'modify'}"/>
-    <title>Pos <c:if test="${registerFlag == 'create'}">생성</c:if>
+    <title>직급 <c:if test="${registerFlag == 'create'}">등록</c:if>
                   <c:if test="${registerFlag == 'modify'}">수정</c:if>
     </title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>

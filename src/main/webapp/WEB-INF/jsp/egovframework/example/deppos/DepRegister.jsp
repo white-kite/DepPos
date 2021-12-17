@@ -24,7 +24,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <c:set var="registerFlag" value="${empty depVO.depCode ? 'create' : 'modify'}"/>
-    <title>Dep <c:if test="${registerFlag == 'create'}">생성</c:if>
+    <title>부서 <c:if test="${registerFlag == 'create'}">등록</c:if>
                   <c:if test="${registerFlag == 'modify'}">수정</c:if>
     </title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
@@ -52,7 +52,12 @@
         	frm = document.detailForm;
         	if(!validateDepVO(frm)){
                 return;
-            }else{
+            } else if(frm.depName.value == frm.depUpde.value){
+            	alert("부서명과 상위부서명이 같을 수 없습니다.");
+            	return;
+            }
+        	
+        	else{
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addDep.do' : '/updateDep.do'}"/>";
                 frm.submit();
             }
@@ -104,16 +109,11 @@
     			</td>
     		</tr>
     		<tr>
-    			<td class="tbtd_caption"><label for="depUpde">상위부서코드</label></td>
+    			<td class="tbtd_caption"><label for="depUpde">상위부서명</label></td>
     			<td class="tbtd_content">
-    				<%-- <c:forEach items="${getDepUpde}" var="depUpde">
-    				<form:select path="depUpde" name ="selectBox" id="selectBox" class="select_depUpde">
-    				
-    				<option value="${resultsList.depCode}">${resultList.depCode}</option>
-    			
-    				</form:select> --%>
 
     				<form:select path="depUpde" id="catchDepList">
+    				<form:option value="">&nbsp;</form:option>
     				<c:forEach items="${catchDepList}" var="catchDep">
     				<form:option value="${catchDep.depName}"><c:out value="${catchDep.depName}"/></form:option>
     				</c:forEach>

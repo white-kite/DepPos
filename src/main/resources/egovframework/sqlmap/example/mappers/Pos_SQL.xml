@@ -74,10 +74,13 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
 		            <when test="searchCondition == 0">
-						AND	POS_CODE LIKE '%' || #{searchKeyword} || '%'
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 		            <when test="searchCondition == 1">
-						AND	POS_NAME LIKE '%' || #{searchKeyword} || '%'
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+					</when>
+					<when test="searchCondition == 2">
+						AND	POS_USES LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 				</choose>
 			</if>
@@ -93,10 +96,13 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
 		            <when test="searchCondition == 0">
-						AND POS_CODE LIKE '%' || #{searchKeyword} || '%'
+						AND POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 		            <when test="searchCondition == 1">
-						AND	POS_NAME LIKE '%' || #{searchKeyword} || '%'
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+					</when>
+					<when test="searchCondition == 2">
+						AND	POS_USES LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 				</choose>
 			</if>
