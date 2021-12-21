@@ -115,6 +115,13 @@ public class DepController {
 	@RequestMapping(value = "/addDep.do", method = RequestMethod.GET)
 	public String addDepView(@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
 		model.addAttribute("depVO", new DepVO());
+		
+		System.out.println("addDep.do에 GET에 들어왔다.");
+		
+		List<?> catchDepList = depService.catchDepList();
+		System.out.println("catchDepList===="+catchDepList);
+		model.addAttribute("catchDepList", catchDepList);
+		
 		return "deppos/DepRegister";
 	}
 
@@ -148,7 +155,8 @@ public class DepController {
 		
 		depService.insertDep(depVO);
 		status.setComplete();
-		return "forward:/DepList.do";
+		return "deppos/DepRegister";
+		/*return "forward:/DepList.do";*/
 	}
 
 	/**
@@ -212,7 +220,8 @@ public class DepController {
 
 		depService.updateDep(depVO);
 		status.setComplete();
-		return "forward:/DepList.do";
+		return "deppos/DepRegister";
+		/*return "forward:/DepList.do";*/
 	}
 
 	/**
@@ -227,7 +236,8 @@ public class DepController {
 	public String deleteDep(DepVO depVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO, SessionStatus status) throws Exception {
 		depService.deleteDep(depVO);
 		status.setComplete();
-		return "forward:/DepList.do";
+		return "deppos/DepRegister";
+		/*return "forward:/DepList.do";*/
 	}
 
 }

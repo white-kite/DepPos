@@ -38,12 +38,16 @@
         /* 글 목록 화면 function */
         function fn_dep_selectList() {
            	document.detailForm.action = "<c:url value='/DepList.do'/>";
+           	window.opener.location.href="redirect:/egovSampleList.do";
+           	window.close();
            	document.detailForm.submit();
         }
         
         /* 글 삭제 function */
         function fn_dep_delete() {
            	document.detailForm.action = "<c:url value='/deleteDep.do'/>";
+           	alert("삭제가 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
+           	
            	document.detailForm.submit();
         }
         
@@ -60,7 +64,21 @@
         	else{
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addDep.do' : '/updateDep.do'}"/>";
                 frm.submit();
+                
+                alert("등록이 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
             }
+        }
+        
+        function close1(){
+        	opener.location.reload();
+        	window.close();
+        }
+        
+        
+        window.onbeforeunload = function() {
+
+        	opener.location.reload();
+        	window.close();
         }
         
        
@@ -174,6 +192,12 @@
     			<li>
                     <span class="btn_blue_l">
                         <a href="javascript:document.detailForm.reset();">초기화</a>
+                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                    </span>
+                </li>
+                <li>
+                    <span class="btn_blue_l">
+                        <a href="javascript:close1();">닫기</a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>

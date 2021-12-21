@@ -30,14 +30,20 @@
         /* 글 수정 화면 function */
         function fn_egov_select(id) {
         	document.listForm.selectedId.value = id;
+            window.open("<c:url value='/updateDepView.do?selectedId="+id+"'/>", "", "width=750, height=350, left=100, top=50");
+            document.listForm.submit();
+        	
+        	/* document.listForm.selectedId.value = id;
            	document.listForm.action = "<c:url value='/updateDepView.do'/>";
-           	document.listForm.submit();
+           	document.listForm.submit(); */
         }
         
         /* 글 등록 화면 function */
         function fn_egov_addView() {
-           	document.listForm.action = "<c:url value='/addDep.do'/>";
-           	document.listForm.submit();
+        	window.open("<c:url value='/addDep.do'/>", "depreg", "width=750, height=350, left=100, top=50");
+        	document.listForm.submit();
+           	/* document.listForm.action = "<c:url value='/addDep.do'/>";
+           	document.listForm.submit(); */
         }
         
         /* 글 목록 화면 function */
