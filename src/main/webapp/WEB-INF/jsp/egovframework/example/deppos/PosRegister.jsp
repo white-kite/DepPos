@@ -38,12 +38,16 @@
         /* 글 목록 화면 function */
         function fn_pos_selectList() {
            	document.detailForm.action = "<c:url value='/PosList.do'/>";
+           	window.opener.location.href="redirect:/PosList.do";
+           	window.close();
            	document.detailForm.submit();
         }
         
         /* 글 삭제 function */
         function fn_pos_delete() {
            	document.detailForm.action = "<c:url value='/deletePos.do'/>";
+           	alert("삭제가 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
+           	
            	document.detailForm.submit();
         }
         
@@ -55,7 +59,21 @@
             }else{
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addPos.do' : '/updatePos.do'}"/>";
                 frm.submit();
+                
+                alert("등록이 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
             }
+        }
+        
+        /* function close1(){
+        	opener.location.reload();
+        	window.close();
+        } */
+        
+        
+        window.onbeforeunload = function() {
+
+        	opener.location.reload();
+        	window.close();
         }
         
        
@@ -113,8 +131,8 @@
     		<tr>
     			<td class="tbtd_caption"><label for="posUse">사용여부</label></td>
     			<td class="tbtd_content">
-    				    <form:radiobutton path="posUse" value="Y"/>&nbsp 사용  			
-    					<form:radiobutton path="posUse" value="N"/>&nbsp 미사용 
+    				    <form:radiobutton path="posUse" value="Y" checked="checked"/>&nbsp; 사용  			
+    					<form:radiobutton path="posUse" value="N"/>&nbsp; 미사용 
     				<%-- <form:select path="posUse" cssClass="use">
     					<form:option value="Y" label="Yes" />
     					<form:option value="N" label="No" />
@@ -156,6 +174,12 @@
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
+                <%-- <li>
+                    <span class="btn_blue_l">
+                        <a href="javascript:close1();">닫기</a>
+                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                    </span>
+                </li> --%>
             </ul>
     	</div>
     </div>

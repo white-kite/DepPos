@@ -30,14 +30,21 @@
         /* 글 수정 화면 function */
         function fn_egov_select(id) {
         	document.listForm.selectedId.value = id;
+            window.open("<c:url value='/updatePosView.do?selectedId="+id+"'/>", "", "width=750, height=350, left=100, top=50");
+            document.listForm.submit();
+        	        	
+        	/* document.listForm.selectedId.value = id;
            	document.listForm.action = "<c:url value='/updatePosView.do'/>";
-           	document.listForm.submit();
+           	document.listForm.submit(); */
         }
         
         /* 글 등록 화면 function */
         function fn_egov_addView() {
-           	document.listForm.action = "<c:url value='/addPos.do'/>";
-           	document.listForm.submit();
+        	window.open("<c:url value='/addPos.do'/>", "depreg", "width=750, height=350, left=100, top=50");
+        	document.listForm.submit();
+        	
+           	/* document.listForm.action = "<c:url value='/addPos.do'/>";
+           	document.listForm.submit(); */
         }
         
         /* 글 목록 화면 function */
@@ -78,7 +85,7 @@
         				<form:select path="searchCondition" cssClass="use">
         					<form:option value="1" label="직급코드" />
         					<form:option value="0" label="직급명" />
-        					<form:option value="3" label="사용여부" />
+        					<form:option value="2" label="사용여부" />
         				</form:select>
         			</li>
         			<li><label for="searchKeyword" style="visibility:hidden;display:none;"><spring:message code="search.keyword" /></label>

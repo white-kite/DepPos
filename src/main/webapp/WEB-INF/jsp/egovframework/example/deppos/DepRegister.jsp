@@ -38,7 +38,7 @@
         /* 글 목록 화면 function */
         function fn_dep_selectList() {
            	document.detailForm.action = "<c:url value='/DepList.do'/>";
-           	window.opener.location.href="redirect:/egovSampleList.do";
+           	window.opener.location.href="redirect:/DepList.do";
            	window.close();
            	document.detailForm.submit();
         }
@@ -46,7 +46,7 @@
         /* 글 삭제 function */
         function fn_dep_delete() {
            	document.detailForm.action = "<c:url value='/deleteDep.do'/>";
-           	alert("삭제가 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
+           	alert("삭제가 완료 되었습니다. ");
            	
            	document.detailForm.submit();
         }
@@ -65,14 +65,14 @@
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addDep.do' : '/updateDep.do'}"/>";
                 frm.submit();
                 
-                alert("등록이 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
+                alert("등록이 완료 되었습니다. ");
             }
         }
         
-        function close1(){
+        /* function close1(){
         	opener.location.reload();
         	window.close();
-        }
+        } */
         
         
         window.onbeforeunload = function() {
@@ -151,7 +151,7 @@
     		<tr>
     			<td class="tbtd_caption"><label for="depUse">사용여부</label></td>
     			<td class="tbtd_content">
-    				<form:radiobutton path="depUse" value="Y"/>&nbsp; 사용 		
+    				<form:radiobutton path="depUse" value="Y" checked="checked"/>&nbsp; 사용 		
     				<form:radiobutton path="depUse" value="N"/>&nbsp; 미사용 
     				
     				<%-- <form:select path="depUse" cssClass="use">
@@ -195,12 +195,12 @@
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
-                <li>
+                <%-- <li>
                     <span class="btn_blue_l">
                         <a href="javascript:close1();">닫기</a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
-                </li>
+                </li> --%>
             </ul>
     	</div>
     </div>

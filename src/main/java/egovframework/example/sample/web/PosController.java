@@ -79,7 +79,7 @@ public class PosController {
 	@RequestMapping(value = "/PosList.do")
 	public String selectPosList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 
-		System.err.print("컨트롤러 실행");
+		
 		
 		/** EgovPropertyService. */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
@@ -140,7 +140,8 @@ public class PosController {
 
 		posService.insertPos(posVO);
 		status.setComplete();
-		return "forward:/PosList.do";
+		return "deppos/PosRegister";
+		/*return "forward:/PosList.do";*/
 	}
 
 	/**
@@ -193,7 +194,8 @@ public class PosController {
 
 		posService.updatePos(posVO);
 		status.setComplete();
-		return "forward:/PosList.do";
+		return "deppos/PosRegister";
+		/*return "forward:/PosList.do";*/
 	}
 
 	/**
@@ -208,7 +210,8 @@ public class PosController {
 	public String deletePos(PosVO posVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO, SessionStatus status) throws Exception {
 		posService.deletePos(posVO);
 		status.setComplete();
-		return "forward:/PosList.do";
+		return "deppos/PosRegister";
+		/*return "forward:/PosList.do";*/
 	}
 
 }
