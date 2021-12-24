@@ -80,7 +80,7 @@
 						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 					<when test="searchCondition == 2">
-						AND	POS_USES LIKE CONCAT('%', #{searchKeyword},'%')
+						AND	POS_USE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 				</choose>
 			</if>
@@ -102,7 +102,7 @@
 						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 					<when test="searchCondition == 2">
-						AND	POS_USES LIKE CONCAT('%', #{searchKeyword},'%')
+						AND	POS_USE LIKE CONCAT('%', #{searchKeyword},'%')
 					</when>
 				</choose>
 			</if>

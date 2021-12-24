@@ -102,8 +102,8 @@
         	</div>
         	<!-- List -->
         	<div id="table">
-        		<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="부서코드, 부서명, 상위부서코드, 사용여부 표시하는 테이블">
-        			<caption style="visibility:hidden">부서코드, 부서명, 상위부서코드, 사용여부 표시하는 테이블</caption>
+        		<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블">
+        			<caption style="visibility:hidden">부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블</caption>
         			<colgroup>
         				<col width="40"/>
         				<col width="100"/>
@@ -116,7 +116,7 @@
         				<th align="center">No</th>
         				<th align="center">부서코드</th>
         				<th align="center">부서명</th>
-        				<th align="center">상위부서코드</th>
+        				<th align="center">상위부서명</th>
         				<th align="center">사용여부</th>
         				
         			</tr>

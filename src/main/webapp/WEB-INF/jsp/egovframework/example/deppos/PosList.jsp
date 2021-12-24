@@ -83,8 +83,8 @@
         			<li>
         			    <label for="searchCondition" style="visibility:hidden;"><spring:message code="search.choose" /></label>
         				<form:select path="searchCondition" cssClass="use">
-        					<form:option value="1" label="직급코드" />
-        					<form:option value="0" label="직급명" />
+        					<form:option value="1" label="직급명" />
+        					<form:option value="0" label="직급코드" />
         					<form:option value="2" label="사용여부" />
         				</form:select>
         			</li>

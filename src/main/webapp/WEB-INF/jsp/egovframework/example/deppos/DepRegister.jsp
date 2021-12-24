@@ -75,6 +75,7 @@
         } */
         
         
+        /* 창닫았을때 부모창 reload*/
         window.onbeforeunload = function() {
 
         	opener.location.reload();
@@ -181,14 +182,14 @@
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
-    			<c:if test="${registerFlag == 'modify'}">
+    			<%-- <c:if test="${registerFlag == 'modify'}">
                     <li>
                         <span class="btn_blue_l">
                             <a href="javascript:fn_dep_delete();">삭제</a>
                             <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                         </span>
                     </li>
-    			</c:if>
+    			</c:if> --%>
     			<li>
                     <span class="btn_blue_l">
                         <a href="javascript:document.detailForm.reset();">초기화</a>
