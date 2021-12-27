@@ -46,7 +46,7 @@
         /* 글 삭제 function */
         function fn_pos_delete() {
            	document.detailForm.action = "<c:url value='/deletePos.do'/>";
-           	alert("삭제가 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
+           	alert("삭제가 완료 되었습니다.");
            	
            	document.detailForm.submit();
         }
@@ -60,7 +60,7 @@
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addPos.do' : '/updatePos.do'}"/>";
                 frm.submit();
                 
-                alert("등록이 완료 되었습니다. 닫기 버튼을 눌러주세요. ");
+                alert("등록이 완료 되었습니다.");
             }
         }
         

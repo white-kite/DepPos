@@ -68,7 +68,12 @@
 	<select id="selectPosList" parameterType="searchVO" resultType="egovMap">
 
 			SELECT
-				POS_CODE, POS_NAME, POS_USE
+				POS_CODE, 
+				POS_NAME, 
+				CASE WHEN POS_USE = 'Y'
+					THEN '사용'
+					ELSE '미사용' 
+				END AS POS_USE
 			FROM POS
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">

@@ -58,7 +58,13 @@
 	<select id="selectDep" resultMap="depVO">
 
 			SELECT
-				DEP_CODE, DEP_NAME, DEP_UPDE, DEP_USE, DEP_NOTE, DEP_REGM, DEP_REGD
+				DEP_CODE, 
+				DEP_NAME, 
+				DEP_UPDE, 
+				DEP_USE, 
+				DEP_NOTE, 
+				DEP_REGM, 
+				DEP_REGD
 			FROM DEP
 			WHERE DEP_CODE=#{depCode}
 
@@ -67,7 +73,13 @@
 	<select id="selectDepList" parameterType="searchVO" resultType="egovMap">
 
 			SELECT
-				DEP_CODE, DEP_NAME, DEP_UPDE, DEP_USE
+				DEP_CODE, 
+				DEP_NAME, 
+				DEP_UPDE, 
+				CASE WHEN DEP_USE = 'Y'
+					THEN '사용'
+					ELSE '미사용' 
+				END AS DEP_USE
 			FROM DEP
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
