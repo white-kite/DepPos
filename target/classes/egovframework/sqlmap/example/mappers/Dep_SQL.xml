@@ -75,26 +75,47 @@
 			SELECT
 				DEP_CODE, 
 				DEP_NAME, 
-				DEP_UPDE, 
+				(SELECT DEP_NAME FROM DEP B WHERE A.DEP_UPDE=B.DEP_CODE) AS DEP_UPDE, 
 				CASE WHEN DEP_USE = 'Y'
 					THEN '사용'
 					ELSE '미사용' 
 				END AS DEP_USE
-			FROM DEP
+			FROM DEP A
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
-		            <when test="searchCondition == 0">
-						AND	DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
-					</when>
-		            <when test="searchCondition == 1">
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 0">
 						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
 					</when>
-					<when test="searchCondition == 2">
-						AND	DEP_USE LIKE CONCAT('%', #{searchKeyword},'%')
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn ==0">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
 					</when>
+					
+					
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 1">
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn == 1">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+					
 				</choose>
 			</if>
+			<choose>
+		        	<when test ="searchUseYn == 0">
+						AND DEP_USE = 'Y'
+					</when>
+					<when test ="searchUseYn == 1">
+						AND DEP_USE = 'N'
+					</when>
+			</choose>
+			
+			
+			
 			ORDER BY DEP_CODE ASC
 			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
@@ -106,21 +127,42 @@
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
-		            <when test="searchCondition == 0">
-						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
-					</when>
-		            <when test="searchCondition == 1">
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 0">
 						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
 					</when>
-					<when test="searchCondition == 2">
-						AND	DEP_USE LIKE CONCAT('%', #{searchKeyword},'%')
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn ==0">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
 					</when>
+					
+					
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 1">
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn == 1">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+					
 				</choose>
+			</if>
+			
+			<if  test="searchKeyword == null and searchKeyword == ''">
+			<choose>
+		        	<when test ="searchUseYn == 0">
+						AND DEP_USE = 'Y'
+					</when>
+					<when test ="searchUseYn == 1">
+						AND DEP_USE = 'N'
+					</when>
+			</choose>
 			</if>
 	</select>
 	
 	<select id="catchDepList" resultMap="depVO">
-		SELECT DEP_NAME
+		SELECT DEP_NAME, DEP_CODE
 		FROM DEP
 	</select>
 

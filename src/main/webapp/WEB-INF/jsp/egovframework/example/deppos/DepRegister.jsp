@@ -134,7 +134,7 @@
     				<form:select path="depUpde" id="catchDepList">
     				<form:option value="">&nbsp;</form:option>
     				<c:forEach items="${catchDepList}" var="catchDep">
-    				<form:option value="${catchDep.depName}"><c:out value="${catchDep.depName}"/></form:option>
+    				<form:option value="${catchDep.depCode}"><c:out value="${catchDep.depName}"/></form:option>
     				</c:forEach>
     				</form:select>
 
@@ -208,6 +208,7 @@
     <!-- 검색조건 유지 -->
     <input type="hidden" name="searchCondition" value="<c:out value='${searchVO.searchCondition}'/>"/>
     <input type="hidden" name="searchKeyword" value="<c:out value='${searchVO.searchKeyword}'/>"/>
+    <input type="hidden" name="searchUseYn" value="<c:out value='${searchVO.searchUseYn}'/>"/>
     <input type="hidden" name="pageIndex" value="<c:out value='${searchVO.pageIndex}'/>"/>
 </form:form>
 </body>

@@ -77,6 +77,7 @@
         	</div>
         	
         	
+        	<ul><li>첫 화면은 사용중인 부서만 보여집니다. 미사용 부서 확인 필요 시 검색을 해주세요.</li></ul>
         	
         	<!-- // 타이틀 -->
         	<div id="search">
@@ -84,14 +85,20 @@
         			<li>
         			    <label for="searchCondition" style="visibility:hidden;"><spring:message code="search.choose" /></label>
         				<form:select path="searchCondition" cssClass="use">
-        					<form:option value="1" label="부서명" />
-        					<form:option value="0" label="부서코드" />
-        					<form:option value="2" label="사용여부"/>
+        					<form:option value="0" label="부서명" />
+        					<form:option value="1" label="부서코드" />
+        					
         				</form:select>
         			</li>
         			<li><label for="searchKeyword" style="visibility:hidden;display:none;"><spring:message code="search.keyword" /></label>
                         <form:input path="searchKeyword" cssClass="txt"/>
                     </li>
+                     <!-- 사용여부 -->
+        			<li>
+        					<form:radiobutton path="searchUseYn" value="0"  label="사용" checked="checked" />
+        					<form:radiobutton path="searchUseYn" value="1" label="미사용"/>
+        					
+        			</li>
         			<li>
         	            <span class="btn_blue_l">
         	                <a href="javascript:fn_egov_selectList();"><spring:message code="button.search" /></a>
