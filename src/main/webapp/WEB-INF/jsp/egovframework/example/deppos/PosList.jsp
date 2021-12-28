@@ -85,12 +85,18 @@
         				<form:select path="searchCondition" cssClass="use">
         					<form:option value="1" label="직급명" />
         					<form:option value="0" label="직급코드" />
-        					<form:option value="2" label="사용여부" />
+        					
         				</form:select>
         			</li>
         			<li><label for="searchKeyword" style="visibility:hidden;display:none;"><spring:message code="search.keyword" /></label>
                         <form:input path="searchKeyword" cssClass="txt"/>
                     </li>
+                    <!-- 사용여부 -->
+        			<li>
+        					<form:radiobutton path="searchUseYn" value="0"  label="사용" checked="checked" />
+        					<form:radiobutton path="searchUseYn" value="1" label="미사용"/>
+        					
+        			</li>
         			<li>
         	            <span class="btn_blue_l">
         	                <a href="javascript:fn_egov_selectList();"><spring:message code="button.search" /></a>
@@ -123,7 +129,7 @@
             			<tr>
             				<td align="center" class="listtd"><c:out value="${(searchVO.pageIndex-1) * searchVO.pageSize + status.count}"/></td>
             				<td align="center" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.posCode}"/>')"><c:out value="${result.posCode}"/></a></td>
-            				<td align="left" class="listtd"><c:out value="${result.posName}"/>&nbsp;</td>
+            				<td align="center" class="listtd"><c:out value="${result.posName}"/>&nbsp;</td>
             				
             				<td align="center" class="listtd"><c:out value="${result.posUse}"/>&nbsp;</td>
             				

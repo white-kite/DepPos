@@ -78,17 +78,35 @@
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
-		            <when test="searchCondition == 0">
+		            <when test="searchCondition == 0 and searchUseYn == 0">
 						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'Y'
 					</when>
-		            <when test="searchCondition == 1">
+		            <when test="searchCondition == 1 and searchUseYn == 0">
 						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='Y'
 					</when>
-					<when test="searchCondition == 2">
-						AND	POS_USE LIKE CONCAT('%', #{searchKeyword},'%')
+					<when test="searchCondition == 0 and searchUseYn == 1">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'N'
 					</when>
+		            <when test="searchCondition == 1 and searchUseYn == 1">
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='N'
+					</when>
+					
 				</choose>
 			</if>
+			
+			<choose>
+				<when test="searchUseYn == 0">
+					AND POS_USE = 'Y'
+				</when>
+				<when test="searchUseYn == 1">
+					AND POS_USE = 'N'
+				</when>
+			</choose>
+			
 			ORDER BY POS_CODE ASC
 			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
@@ -100,16 +118,34 @@
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
-		            <when test="searchCondition == 0">
-						AND POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+		            <when test="searchCondition == 0 and searchUseYn == 0">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'Y'
 					</when>
-		            <when test="searchCondition == 1">
+		            <when test="searchCondition == 1 and searchUseYn == 0">
 						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='Y'
 					</when>
-					<when test="searchCondition == 2">
-						AND	POS_USE LIKE CONCAT('%', #{searchKeyword},'%')
+					<when test="searchCondition == 0 and searchUseYn == 1">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'N'
 					</when>
+		            <when test="searchCondition == 1 and searchUseYn == 1">
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='N'
+					</when>
+					
 				</choose>
+			</if>
+			<if  test="searchKeyword == null and searchKeyword == ''">
+			<choose>
+				<when test="searchUseYn == 0">
+					AND POS_USE = 'Y'
+				</when>
+				<when test="searchUseYn == 1">
+					AND POS_USE = 'N'
+				</when>
+			</choose>
 			</if>
 	</select>
 
