@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
   /**
-  * @Class Name : DepList.jsp
+  * @Class Name : DepChart.jsp
   * @Description : Dep List 화면
   * @Modification Information
   *
@@ -23,49 +23,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>부서목록 조회</title>
+    <title>부서 조직도 조회</title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
         
-        /* 글 수정 화면 function */
-        function fn_egov_select(id) {
-        	document.listForm.selectedId.value = id;
-            window.open("<c:url value='/updateDepView.do?selectedId="+id+"'/>", "", "width=750, height=350, left=100, top=50");
-            document.listForm.submit();
-        	
-        	/* document.listForm.selectedId.value = id;
-           	document.listForm.action = "<c:url value='/updateDepView.do'/>";
-           	document.listForm.submit(); */
-        }
         
-        /* 글 등록 화면 function */
-        function fn_egov_addView() {
-        	window.open("<c:url value='/addDep.do'/>", "depreg", "width=750, height=350, left=100, top=50");
-        	document.listForm.submit();
-           	/* document.listForm.action = "<c:url value='/addDep.do'/>";
-           	document.listForm.submit(); */
-        }
         
         /* 글 목록 화면 function */
         function fn_egov_selectList() {
-        	document.listForm.action = "<c:url value='/DepList.do'/>";
+        	document.listForm.action = "<c:url value='/DepChart.do'/>";
            	document.listForm.submit();
         }
         
         /* pagination 페이지 링크 function */
         function fn_egov_link_page(pageNo){
         	document.listForm.pageIndex.value = pageNo;
-        	document.listForm.action = "<c:url value='/DepList.do'/>";
+        	document.listForm.action = "<c:url value='/DepChart.do'/>";
            	document.listForm.submit();
         }
         
         
     </script>
+    <style type="text/css">
+
+    /* 모든 체크박스를 숨김 처리 한다. */
+    input[type="checkbox"] {
+        display:none;
+    }
+
+    input[type="checkbox"]:checked~ul {
+        display:none;
+    }
+	</style>
+
 </head>
 
 <body style="text-align:center; margin:0 auto; display:inline; padding-top:100px;">
     <form:form commandName="searchVO" id="listForm" name="listForm" method="post">
-        <input type="hidden" name="selectedId" />
+        <!-- <input type="hidden" name="selectedId" /> -->
         <div id="content_pop">
         	<!-- 타이틀 -->
         	<div id="title">
@@ -77,10 +72,10 @@
         	</div>
         	
         	
-        	첫 화면은 사용중인 부서만 보여집니다. 미사용 부서 확인 필요 시 검색을 해주세요.
+        	
         	
         	<!-- // 타이틀 -->
-        	<div id="search">
+        	<%-- <div id="search">
         		<ul>
         			<li>
         			    <label for="searchCondition" style="visibility:hidden;"><spring:message code="search.choose" /></label>
@@ -107,45 +102,78 @@
         	            </span>
         	        </li>
                 </ul>
-        	</div>
+        	</div> --%>
         	<!-- List -->
         	<div id="table">
         		<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블">
-        			<caption style="visibility:hidden">부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블</caption>
+        			<caption style="visibility:hidden">상위부서명, 부서명 표시하는 조직도 테이블</caption>
         			<colgroup>
         				<col width="40"/>
         				<col width="100"/>
-        				<col width="150"/>
-        				<col width="150"/>
+        				
+        				
         				<col width="?"/>
         				
         			</colgroup>
         			<tr>
         				<th align="center">No</th>
-        				<th align="center">부서코드</th>
-        				<th align="center">부서명</th>
         				<th align="center">상위부서명</th>
-        				<th align="center">사용여부</th>
+        				
+        				<th align="center">부서명</th>
+        				
         				
         			</tr>
         			<c:forEach var="result" items="${resultList}" varStatus="status">
             			<tr>
             				<td align="center" class="listtd"><c:out value="${(searchVO.pageIndex-1) * searchVO.pageSize + status.count}"/></td>
-            				<td align="center" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.depCode}"/>')"><c:out value="${result.depCode}"/></a></td>
-            				<td align="center" class="listtd"><c:out value="${result.depName}"/>&nbsp;</td>
             				<td align="center" class="listtd"><c:out value="${result.depUpde}"/>&nbsp;</td>
-            				<td align="center" class="listtd"><c:out value="${result.depUse}"/>&nbsp;</td>
+            				
+            				<td align="center" class="listtd"><c:out value="${result.depName}"/>&nbsp;</td>
+            				
             				
             			</tr>
         			</c:forEach>
         		</table>
         	</div>
+        	<!-- 트리구조 만들기 -->
+        	<div class="menu_tree_management">
+        	<div class="title">메뉴 관리</div>
+    		<div class="table_ctn">
+       		<div class="menu_tree">
+        	<ul class="tree">
+        		<c:forEach var="result" items="${updeList}" varStatus="status">
+        			<li>
+        				<input type="checkbox" id="root"/>
+        				<label for="root"/>부서조직도
+        				<ul>
+        					<li>
+        					<input type="checkbox" id="ch1"/>
+        					<label for="ch1"><c:out value="${updeL.depUpde}"/></label>
+        						<ul class="sub_menu">
+        							<c:forEach var="result" items="${dodeList}" varStatus="status">
+        								<li>
+        									<a href="">
+        										<c:out value="${dodeL.depName}"/>
+        									</a>
+        								</li>
+        							</c:forEach>
+        						</ul>
+        					</li>
+        				</ul>
+        			</li>
+        		</c:forEach>
+        	</ul>
+        	</div>
+        	</div>
+        	</div>
+        	
+        	
         	<!-- /List -->
         	<div id="paging">
         		<ui:pagination paginationInfo = "${paginationInfo}" type="image" jsFunction="fn_egov_link_page" />
         		<form:hidden path="pageIndex" />
         	</div>
-        	<div id="sysbtn">
+        	<%-- <div id="sysbtn">
         	  <ul>
         	      <li>
         	          <span class="btn_blue_l">
@@ -154,7 +182,7 @@
                       </span>
                   </li>
               </ul>
-        	</div>
+        	</div> --%>
         </div>
     </form:form>
 </body>

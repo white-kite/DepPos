@@ -164,6 +164,34 @@
 	<select id="catchDepList" resultMap="depVO">
 		SELECT DEP_NAME, DEP_CODE
 		FROM DEP
+		WHERE DEP_USE='Y'
 	</select>
+	
+	
+	
+	
+	<select id="selectDepChart" parameterType="searchVO" resultType="egovMap">
+
+			SELECT
+				DEP_CODE, 
+				DEP_NAME, 
+				(SELECT DEP_NAME FROM DEP B WHERE A.DEP_UPDE=B.DEP_CODE) AS DEP_UPDE, 
+				CASE WHEN DEP_USE = 'Y'
+					THEN '사용'
+					ELSE '미사용' 
+				END AS DEP_USE
+			FROM DEP A
+
+			ORDER BY DEP_UPDE DESC
+			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+	<select id="selectDepChartTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM DEP
+			
+	</select>	
+	
 
 </mapper>

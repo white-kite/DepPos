@@ -23,39 +23,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>부서목록 조회</title>
+    <title>부서 조직도 조회</title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
         
-        /* 글 수정 화면 function */
-        function fn_egov_select(id) {
-        	document.listForm.selectedId.value = id;
-            window.open("<c:url value='/updateDepView.do?selectedId="+id+"'/>", "", "width=750, height=350, left=100, top=50");
-            document.listForm.submit();
-        	
-        	/* document.listForm.selectedId.value = id;
-           	document.listForm.action = "<c:url value='/updateDepView.do'/>";
-           	document.listForm.submit(); */
-        }
         
-        /* 글 등록 화면 function */
-        function fn_egov_addView() {
-        	window.open("<c:url value='/addDep.do'/>", "depreg", "width=750, height=350, left=100, top=50");
-        	document.listForm.submit();
-           	/* document.listForm.action = "<c:url value='/addDep.do'/>";
-           	document.listForm.submit(); */
-        }
         
         /* 글 목록 화면 function */
         function fn_egov_selectList() {
-        	document.listForm.action = "<c:url value='/DepList.do'/>";
+        	document.listForm.action = "<c:url value='/DepChart.do'/>";
            	document.listForm.submit();
         }
         
         /* pagination 페이지 링크 function */
         function fn_egov_link_page(pageNo){
         	document.listForm.pageIndex.value = pageNo;
-        	document.listForm.action = "<c:url value='/DepList.do'/>";
+        	document.listForm.action = "<c:url value='/DepChart.do'/>";
            	document.listForm.submit();
         }
         
@@ -71,13 +54,14 @@
         	<div id="title">
         		<ul>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepList.do">부서 목록 조회</a></li>
-        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepChart.do">부서 조직도 조회</a></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/ChartFrame.do">부서 조직도 조회</a></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/egovSampleList.do">샘플 목록 조회</a></li>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/PosList.do">직급 목록 조회</a></li>
         		</ul>
         	</div>
         	
         	
-        	첫 화면은 사용중인 부서만 보여집니다. 미사용 부서 확인 필요 시 검색을 해주세요.
+        	<ul><li>첫 화면은 사용중인 부서만 보여집니다. 미사용 부서 확인 필요 시 검색을 해주세요.</li></ul>
         	
         	<!-- // 타이틀 -->
         	<div id="search">

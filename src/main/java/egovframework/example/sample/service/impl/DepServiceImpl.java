@@ -147,5 +147,27 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public List<?> catchDepList() throws Exception {
 		return depDAO.catchDepList();
 	}
+	
+	/**
+	 * 글 목록을 조회한다.
+	 * @param searchVO - 조회할 정보가 담긴 VO
+	 * @return 글 목록
+	 * @exception Exception
+	 */
+	@Override
+	public List<?> selectDepChart(SampleDefaultVO searchVO) throws Exception {
+		return depDAO.selectDepChart(searchVO);
+	}
+
+	/**
+	 * 글 총 갯수를 조회한다.
+	 * @param searchVO - 조회할 정보가 담긴 VO
+	 * @return 글 총 갯수
+	 * @exception
+	 */
+	@Override
+	public int selectDepChartTotCnt(SampleDefaultVO searchVO) {
+		return depDAO.selectDepChartTotCnt(searchVO);
+	}
 
 }

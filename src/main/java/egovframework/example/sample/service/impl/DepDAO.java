@@ -110,4 +110,24 @@ public class DepDAO extends EgovAbstractDAO {
 	public List<?> catchDepList(DepVO vo) throws Exception{
 		return list("depDAO.catchDepList", vo);
 	}
+	
+	/**
+	 * 조직도 목록을 조회한다.
+	 * @param searchMap - 조회할 정보가 담긴 Map
+	 * @return 글 목록
+	 * @exception Exception
+	 */
+	public List<?> selectDepChart(SampleDefaultVO searchVO) throws Exception {
+		return list("depDAO.selectDepChart", searchVO);
+	}
+
+	/**
+	 * 조직도 총 갯수를 조회한다.
+	 * @param searchMap - 조회할 정보가 담긴 Map
+	 * @return 글 총 갯수
+	 * @exception
+	 */
+	public int selectDepChartTotCnt(SampleDefaultVO searchVO) {
+		return (Integer) select("depDAO.selectDepChartTotCnt", searchVO);
+	}
 }
