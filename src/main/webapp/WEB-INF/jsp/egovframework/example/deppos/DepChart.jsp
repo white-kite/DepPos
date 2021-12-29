@@ -26,6 +26,7 @@
     <title>부서 조직도 조회</title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
+    
         
         
         
@@ -43,8 +44,37 @@
         }
         
         
+       
+
+        
+        
     </script>
-    <style type="text/css">
+    <script language="JavaScript" type="text/JavaScript" src="/js/jquery/jquery-3.3.1.min.js">
+    $(document).ready(function(){
+        $("#tree .menu").click(function(){
+            var hide = $(this).next("ul");
+ 
+            // hide 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+            if( hide.is(":visible") ){
+                hide.slideUp();
+            }else{
+                hide.slideDown();
+            }
+        }).mouseover(function(){
+            $(this).next("ul").slideDown();
+        });
+ 
+ 
+        // menu class 중에 두번째 있는 menu 의 하위에 있는 a태그에 클릭 이벤트를 발생시킨다.
+        $(".menu:eq(1)>a").click();
+    });
+
+
+    	        
+    	        
+   </script>
+    
+    <!-- <style type="text/css">
 
     /* 모든 체크박스를 숨김 처리 한다. */
     input[type="checkbox"] {
@@ -54,6 +84,11 @@
     input[type="checkbox"]:checked~ul {
         display:none;
     }
+	</style> -->
+	
+	<style>
+		.menu a{cursor:pointer;}
+    	.menu .hide{display:none;}
 	</style>
 
 </head>
@@ -135,34 +170,43 @@
         			</c:forEach>
         		</table>
         	</div>
+        </div>
+      </form:form>
+      <form:form commandName="depVO" id="detailForm" name="detailForm">
         	<!-- 트리구조 만들기 -->
         	<div class="menu_tree_management">
         	<div class="title">메뉴 관리</div>
     		<div class="table_ctn">
        		<div class="menu_tree">
-        	<ul class="tree">
-        		<c:forEach var="result" items="${updeList}" varStatus="status">
-        			<li>
-        				<input type="checkbox" id="root"/>
+       		
+        	<ul  id="tree" class="tree">
+        	
+        			<li class="menu">
+        				<form:checkbox path="" id="root" value=""/>
         				<label for="root"/>부서조직도
-        				<ul>
-        					<li>
-        					<input type="checkbox" id="ch1"/>
-        					<label for="ch1"><c:out value="${updeL.depUpde}"/></label>
-        						<ul class="sub_menu">
-        							<c:forEach var="result" items="${dodeList}" varStatus="status">
-        								<li>
-        									<a href="">
-        										<c:out value="${dodeL.depName}"/>
-        									</a>
+        				
+        				<ul class="menu">
+        				<c:forEach var="updeList" items="${updeList}" varStatus="status">
+        					<li class="menu">
+        					<form:checkbox path="depName" value="depCode"/>
+        						<a><c:out value="${updeList.depName}"/></a>
+        						<ul class="hide">
+        							<c:forEach var="dodeList" items="${dodeList}" varStatus="status">
+        								<li class="menu">
+        									
+        										<c:out value="${dodeList.depName}"/>
+        									
         								</li>
         							</c:forEach>
         						</ul>
         					</li>
+        				</c:forEach>
         				</ul>
+        				
         			</li>
-        		</c:forEach>
+        			
         	</ul>
+        	
         	</div>
         	</div>
         	</div>
@@ -183,7 +227,7 @@
                   </li>
               </ul>
         	</div> --%>
-        </div>
+        
     </form:form>
 </body>
 </html>

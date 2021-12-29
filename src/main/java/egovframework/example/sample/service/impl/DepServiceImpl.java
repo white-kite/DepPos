@@ -169,5 +169,14 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public int selectDepChartTotCnt(SampleDefaultVO searchVO) {
 		return depDAO.selectDepChartTotCnt(searchVO);
 	}
+	
+	/*상위부서와 하위부서 출력을 위해*/
+	public List<?> updeList() throws Exception {
+		return depDAO.updeList();
+	}
+	
+	public List<?> dodeList(DepVO vo) throws Exception {
+		return depDAO.dodeList(vo);
+	}
 
 }

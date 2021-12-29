@@ -61,6 +61,7 @@ public class DepVO extends SampleDefaultVO {
 	
 	/** 부서등록일시 */
 	private String depUptd;
+	
 
 	
 	
@@ -136,6 +137,7 @@ public class DepVO extends SampleDefaultVO {
 	public void setDepUptd(String depUptd) {
 		this.depUptd = depUptd;
 	}
+
 
 
 

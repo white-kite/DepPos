@@ -108,5 +108,9 @@ public interface DepMapper {
 	 * @exception
 	 */
 	int selectDepChartTotCnt(SampleDefaultVO searchVO);
+	
+	/*상위부서와 하위부서 출력을 위해*/
+	List<?> updeList() throws Exception;
+	List<?> dodeList(DepVO vo) throws Exception;
 
 }

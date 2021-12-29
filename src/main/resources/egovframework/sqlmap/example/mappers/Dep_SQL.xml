@@ -191,7 +191,19 @@
 			SELECT COUNT(*) totcnt
 			FROM DEP
 			
-	</select>	
+	</select>
+	
+	<select id="updeList" resultMap="depVO">
+			SELECT DEP_CODE, DEP_NAME, DEP_UPDE 
+			FROM DEP
+			WHERE DEP_UPDE = '';
+	</select>
+	
+	<select id="dodeList" parameterType="depVO" resultMap="depVO">
+			SELECT DEP_NAME, DEP_UPDE 
+			FROM DEP
+			WHERE DEP_UPDE != ''
+	</select>
 	
 
 </mapper>

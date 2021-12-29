@@ -77,7 +77,7 @@ public class ChartController {
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/DepChart.do")
-	public String selectDepChart(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
+	public String selectDepChart(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model, DepVO depVO) throws Exception {
 
 		
 		
@@ -101,7 +101,19 @@ public class ChartController {
 		int totCnt = depService.selectDepChartTotCnt(searchVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
-
+		
+		/*상위부서와 하위부서 출력을 위해*/
+		
+		List<?> updeList = depService.updeList();
+		System.out.println("updeList===="+updeList);
+		model.addAttribute("updeList",updeList);
+		
+		
+		System.out.println("depVO============"+depVO);
+		List<?> dodeList = depService.dodeList(depVO);
+		model.addAttribute("dodeList",dodeList);
+		System.out.println("dodeList===="+dodeList);
+		
 		return "deppos/DepChart";
 	}
 

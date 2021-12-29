@@ -130,4 +130,12 @@ public class DepDAO extends EgovAbstractDAO {
 	public int selectDepChartTotCnt(SampleDefaultVO searchVO) {
 		return (Integer) select("depDAO.selectDepChartTotCnt", searchVO);
 	}
+	
+	/*상위부서와 하위부서 출력을 위해*/
+	public List<?> updeList(DepVO vo) throws Exception{
+		return list("depDAO.updeList", vo);
+	}
+	public List<?> dodeList(DepVO vo) throws Exception{
+		return list("depDAO.dodeList", vo);
+	}
 }
