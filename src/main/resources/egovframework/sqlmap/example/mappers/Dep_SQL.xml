@@ -12,6 +12,11 @@
 		<result property="depRegd" column="dep_regd"/>
 		<result property="depUptm" column="dep_uptm"/>
 		<result property="depUptd" column="dep_uptd"/>
+		
+		<result property="depUp" column="dep_up"/>
+		<result property="depUpcd" column="dep_upcd"/>
+		<result property="depDown" column="dep_down"/>
+		<result property="depDocd" column="dep_docd"/>
 	</resultMap>
 
 	<insert id="insertDep" parameterType="depVO">
@@ -202,7 +207,7 @@
 	<select id="dodeList" parameterType="depVO" resultMap="depVO">
 			SELECT DEP_NAME, DEP_UPDE 
 			FROM DEP
-			WHERE DEP_UPDE != ''
+			WHERE DEP_UPDE != '' AND DEP_UPDE=#{depCode}
 	</select>
 	
 

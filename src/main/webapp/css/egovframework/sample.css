@@ -99,3 +99,24 @@ input.txt               {height:18px; background-color:#FFF; border:1px solid #B
 input.essentiality  {height:18px; background-color:#ebebeb; border:1px solid #BCC8D8; padding-top:2px; color:#000; cursor:text;}
 
 
+
+
+
+/*메뉴트리 영역설정*/
+.menu_tree_management {
+  float:left;
+  border: 1px solid #f1f1f1;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 30px;
+  background: #f9f9f9;
+}
+
+/*타이틀 스타일링 */
+.menu_tree_management .title {
+  height: 18px;
+  line-height: 18px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}

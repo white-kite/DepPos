@@ -56,10 +56,10 @@
         	frm = document.detailForm;
         	if(!validateDepVO(frm)){
                 return;
-            } else if(frm.depName.value == frm.depUpde.value){
+            }  else if(frm.depCode.value == frm.depUpde.value){
             	alert("부서명과 상위부서명이 같을 수 없습니다.");
             	return;
-            }
+            } 
         	
         	else{
             	frm.action = "<c:url value="${registerFlag == 'create' ? '/addDep.do' : '/updateDep.do'}"/>";

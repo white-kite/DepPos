@@ -119,5 +119,57 @@ public class ChartController {
 
 	
 	
+	@RequestMapping(value = "/OnlyDepChart.do")
+	public String selectOnlyDepChart(ModelMap model, DepVO depVO) throws Exception {
+
+
+		/*상위부서와 하위부서 출력을 위해*/
+		
+		List<?> updeList = depService.updeList();
+		System.out.println("updeList===="+updeList);
+		model.addAttribute("updeList",updeList);
+		
+		
+		System.out.println("depVO============"+depVO);
+		List<?> dodeList = depService.dodeList(depVO);
+		model.addAttribute("dodeList",dodeList);
+		System.out.println("dodeList===="+dodeList);
+		
+		return "deppos/OnlyDepChart";
+	}
+	
+	
+	
+	@RequestMapping("/OpenDepChart.do")
+	public String updateDepView(@RequestParam("selectedId") String id, Model model) throws Exception {
+		System.out.println("OpenDepChart에 들어왔다.");
+		DepVO depVO = new DepVO();
+		depVO.setDepCode(id);
+		// 변수명은 CoC 에 따라 depVO
+		model.addAttribute(selectDode(depVO, model));
+		return "deppos/OnlyDepChart";
+	}
+	
+	
+	public DepVO selectDode(DepVO depVO, Model model) throws Exception {
+		System.out.println("selectDode에 들어왔다.");
+		model.addAttribute("depVO", depVO);
+	
+		List<?> updeList = depService.updeList();
+		System.out.println("updeList===="+updeList);
+		model.addAttribute("updeList",updeList);
+
+		System.out.println("depVO============"+depVO);
+		List<?> dodeList = depService.dodeList(depVO);
+		model.addAttribute("dodeList",dodeList);
+		System.out.println("dodeList===="+dodeList);
+
+		
+		
+		return depService.selectDep(depVO);
+	}
+	
+	
+	
 
 }

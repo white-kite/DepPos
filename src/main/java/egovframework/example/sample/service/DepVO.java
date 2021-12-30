@@ -62,6 +62,13 @@ public class DepVO extends SampleDefaultVO {
 	/** 부서등록일시 */
 	private String depUptd;
 	
+	
+	/**부서 조직도를 위한 변수들*/
+	private String depUp;
+	private String depUpcd;
+	private String depDown;
+	private String depDocd;
+	
 
 	
 	
@@ -136,6 +143,42 @@ public class DepVO extends SampleDefaultVO {
 
 	public void setDepUptd(String depUptd) {
 		this.depUptd = depUptd;
+	}
+	
+	
+	
+	/**부서 조직도를 위한 변수들*/
+
+	public String getDepUp() {
+		return depUp;
+	}
+
+	public void setDepUp(String depUp) {
+		this.depUp = depUp;
+	}
+
+	public String getDepUpcd() {
+		return depUpcd;
+	}
+
+	public void setDepUpcd(String depUpcd) {
+		this.depUpcd = depUpcd;
+	}
+
+	public String getDepDown() {
+		return depDown;
+	}
+
+	public void setDepDown(String depDown) {
+		this.depDown = depDown;
+	}
+
+	public String getDepDocd() {
+		return depDocd;
+	}
+
+	public void setDepDocd(String depDocd) {
+		this.depDocd = depDocd;
 	}
 
 

@@ -212,7 +212,10 @@ public class DepController {
 			throws Exception {
 
 		beanValidator.validate(depVO, bindingResult);
-
+		
+		List<?> catchDepList = depService.catchDepList();
+		model.addAttribute("catchDepList", catchDepList);
+		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("depVO", depVO);
 			return "deppos/DepRegister";

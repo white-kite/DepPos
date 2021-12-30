@@ -45,11 +45,33 @@
         
         
        
-
+        var checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+        console.log(checkBoxes);
+        var lists = document.querySelectorAll('#second ul');
+        console.log(lists);
         
+        
+        checkBoxes.forEach( function (cb) {
+        	cb.addEventListener('click', openUl(this));
+        });
+        
+        
+        function openUl(cb) {
+        	console.log(cb);
+            if(cb.checked) {
+                lists.forEach(function (ul) {
+                	cb.nextSibling.classList.remove("hide");
+                })
+            } else {
+                lists.forEach(function (ul) {
+                	cb.nextSibling.classList.add("hide");
+                })
+            }
+        }
         
     </script>
-    <script language="JavaScript" type="text/JavaScript" src="/js/jquery/jquery-3.3.1.min.js">
+    
+<!--     <script language="JavaScript" type="text/JavaScript" src="/js/jquery/jquery-3.3.1.min.js">
     $(document).ready(function(){
         $("#tree .menu").click(function(){
             var hide = $(this).next("ul");
@@ -68,27 +90,38 @@
         // menu class 중에 두번째 있는 menu 의 하위에 있는 a태그에 클릭 이벤트를 발생시킨다.
         $(".menu:eq(1)>a").click();
     });
-
-
     	        
     	        
-   </script>
+   </script> -->
+    
+    
     
     <!-- <style type="text/css">
-
     /* 모든 체크박스를 숨김 처리 한다. */
     input[type="checkbox"] {
         display:none;
     }
-
     input[type="checkbox"]:checked~ul {
         display:none;
     }
 	</style> -->
 	
-	<style>
+	<!-- <style>
 		.menu a{cursor:pointer;}
     	.menu .hide{display:none;}
+	</style> -->
+	
+	
+	
+	<style type="text/css">
+	/*
+	#tree.form:checkbox checked~ul{
+	display:none;
+	}
+	*/
+     .hide {
+         display: none;
+     }
 	</style>
 
 </head>
@@ -106,38 +139,8 @@
         		</ul>
         	</div>
         	
-        	
-        	
-        	
-        	<!-- // 타이틀 -->
-        	<%-- <div id="search">
-        		<ul>
-        			<li>
-        			    <label for="searchCondition" style="visibility:hidden;"><spring:message code="search.choose" /></label>
-        				<form:select path="searchCondition" cssClass="use">
-        					<form:option value="0" label="부서명" />
-        					<form:option value="1" label="부서코드" />
-        					
-        				</form:select>
-        			</li>
-        			<li><label for="searchKeyword" style="visibility:hidden;display:none;"><spring:message code="search.keyword" /></label>
-                        <form:input path="searchKeyword" cssClass="txt"/>
-                    </li>
-                     <!-- 사용여부 -->
-                    
-        			<li>
-        					<form:radiobutton path="searchUseYn" value="0"  label="사용" checked="checked" />
-        					<form:radiobutton path="searchUseYn" value="1" label="미사용"/>
-        					
-        			</li>
-        			<li>
-        	            <span class="btn_blue_l">
-        	                <a href="javascript:fn_egov_selectList();"><spring:message code="button.search" /></a>
-        	                <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
-        	            </span>
-        	        </li>
-                </ul>
-        	</div> --%>
+        	<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/OnlyDepChart.do">부서 조직도 조회</a></li>
+        
         	<!-- List -->
         	<div id="table">
         		<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블">
@@ -175,28 +178,28 @@
       <form:form commandName="depVO" id="detailForm" name="detailForm">
         	<!-- 트리구조 만들기 -->
         	<div class="menu_tree_management">
-        	<div class="title">메뉴 관리</div>
-    		<div class="table_ctn">
-       		<div class="menu_tree">
-       		
-        	<ul  id="tree" class="tree">
+        	<div class="title">부서조직도</div>
+
+        	<ul id="tree">
         	
-        			<li class="menu">
-        				<form:checkbox path="" id="root" value=""/>
-        				<label for="root"/>부서조직도
+        			<li>
+        				<form:checkbox path="" id="first" value=""/>
+        				<label for="root"/>어느 부서가 있을까요?
         				
-        				<ul class="menu">
+        				<ul>
         				<c:forEach var="updeList" items="${updeList}" varStatus="status">
-        					<li class="menu">
-        					<form:checkbox path="depName" value="depCode"/>
+        					<li>
+        					<form:checkbox path="depName" value="depCode" id="second"/>
         						<a><c:out value="${updeList.depName}"/></a>
-        						<ul class="hide">
+        						<ul class="dodeList">
         							<c:forEach var="dodeList" items="${dodeList}" varStatus="status">
-        								<li class="menu">
-        									
-        										<c:out value="${dodeList.depName}"/>
-        									
-        								</li>
+        								
+	        								<li>
+	        									
+	        										<c:out value="${dodeList.depName}"/>
+	        									
+	        								</li>
+        								
         							</c:forEach>
         						</ul>
         					</li>
@@ -207,8 +210,7 @@
         			
         	</ul>
         	
-        	</div>
-        	</div>
+
         	</div>
         	
         	
