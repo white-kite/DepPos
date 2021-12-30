@@ -59,6 +59,11 @@
 	
 	
 	<style type="text/css">
+	
+	
+	
+	
+
 	/*
 	#tree.form:checkbox checked~ul{
 	display:none;
@@ -116,6 +121,45 @@
 	        								</li>
         								
         							</c:forEach>
+        						</ul>
+        					</li>
+        				</c:forEach>
+        				</ul>
+        				
+        			</li>
+        			
+        	</ul>
+        	
+
+        	</div>
+        	
+        	
+        	<!-- 트리구조 만들기 -->
+        	<div class="menu_tree_management">
+        	<div class="title">1쿼리 1부서조직도</div>
+        	
+        	<ul id="tree">
+        	
+        			<li>
+        				<form:checkbox path="" id="first" value=""/>
+        				<label for="root"/>어느부서가 있을까요?
+        				
+        				<ul>
+        				<c:forEach var="chartList" items="${chartList}" varStatus="status">
+        					<li>
+        					<a href="javascript:fn_egov_select('<c:out value="${chartList.depUp}"/>')">
+        					<form:checkbox path="depUpcd" value="depUpcd" id="second" name="up"/>
+        						<c:out value="${chartList.depUp}"/></a>
+        						<ul class="chartList">
+        							<%-- <c:forEach var="chartList" items="${chartList}" varStatus="status"> --%>
+        								
+	        								<li>
+	        									
+	        										<c:out value="${chartList.depDown}"/>
+	        									
+	        								</li>
+        								
+        							<%-- </c:forEach> --%>
         						</ul>
         					</li>
         				</c:forEach>

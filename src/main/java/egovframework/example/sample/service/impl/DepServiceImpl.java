@@ -178,5 +178,9 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public List<?> dodeList(DepVO vo) throws Exception {
 		return depDAO.dodeList(vo);
 	}
+	
+	public List<?> chartList() throws Exception {
+		return depDAO.chartList();
+	}
 
 }

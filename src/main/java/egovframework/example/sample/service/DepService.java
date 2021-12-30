@@ -110,5 +110,7 @@ public interface DepService {
 	
 	List<?> dodeList(DepVO vo) throws Exception;
 	
+	List<?> chartList() throws Exception;
+	
 	
 }

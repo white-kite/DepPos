@@ -138,4 +138,7 @@ public class DepDAO extends EgovAbstractDAO {
 	public List<?> dodeList(DepVO vo) throws Exception{
 		return list("depDAO.dodeList", vo);
 	}
+	public List<?> chartList(DepVO vo) throws Exception{
+		return list("depDAO.chartList", vo);
+	}
 }

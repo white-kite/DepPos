@@ -210,5 +210,19 @@
 			WHERE DEP_UPDE != '' AND DEP_UPDE=#{depCode}
 	</select>
 	
+	
+	<select id="chartList" resultMap="depVO">
+			SELECT 
+				A.DEP_NAME AS DEP_UP,
+       			A.DEP_CODE AS DEP_UPCD,
+        		B.DEP_NAME AS DEP_DOWN,
+        		B.DEP_CODE AS DEP_DOCD
+        
+        	FROM DEP A INNER JOIN DEP B
+        	ON A.DEP_CODE = B.DEP_UPDE
+        
+        	ORDER BY DEP_UPCD;
+	</select>
+	
 
 </mapper>

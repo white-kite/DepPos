@@ -135,6 +135,11 @@ public class ChartController {
 		model.addAttribute("dodeList",dodeList);
 		System.out.println("dodeList===="+dodeList);
 		
+		
+		List<?> chartList = depService.chartList();
+		model.addAttribute("chartList",chartList);
+		System.out.println("chartList===="+chartList);
+		
 		return "deppos/OnlyDepChart";
 	}
 	

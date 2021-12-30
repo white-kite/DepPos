@@ -139,8 +139,10 @@
         		</ul>
         	</div>
         	
-        	<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/OnlyDepChart.do">부서 조직도 조회</a></li>
-        
+        		<ul>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/OnlyDepChart.do">부서 조직도 조회</a></li>
+        		</ul>
+        		
         	<!-- List -->
         	<div id="table">
         		<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블">
