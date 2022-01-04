@@ -121,7 +121,10 @@ public class ChartController {
 	
 	@RequestMapping(value = "/OnlyDepChart.do")
 	public String selectOnlyDepChart(ModelMap model, DepVO depVO) throws Exception {
-
+		
+		/*for(int 0; i<sitemap.size(); i) {
+			System.out.pringln("1>>"sitemap.get(i).getMenuMn())
+		}*/
 
 		/*상위부서와 하위부서 출력을 위해*/
 		

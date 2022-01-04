@@ -50,6 +50,7 @@
            	document.detailForm.submit();
         }
     	
+    
        
         
     </script>
@@ -69,9 +70,9 @@
 	display:none;
 	}
 	*/
-     .hide {
+     /* .hide {
          display: none;
-     }
+     } */
 	</style>
 
 </head>

@@ -132,7 +132,7 @@
     			<td class="tbtd_content">
 
     				<form:select path="depUpde" id="catchDepList">
-    					<form:option value="">&nbsp;</form:option>
+    					<form:option value=''>&nbsp;</form:option>
     					<c:forEach items="${catchDepList}" var="catchDep">
     					<form:option value="${catchDep.depCode}">
     						<c:out value="${catchDep.depName}"/></form:option>
