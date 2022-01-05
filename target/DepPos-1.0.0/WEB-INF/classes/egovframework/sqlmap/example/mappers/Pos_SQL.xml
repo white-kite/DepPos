@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.PosMapper">
+
+	<resultMap id="posVO" type="egovframework.example.sample.service.PosVO">
+		<result property="posCode" column="pos_code"/>
+		<result property="posName" column="pos_name"/>
+		
+		<result property="posUse" column="pos_use"/>
+		<result property="posNote" column="pos_note"/>
+		<result property="posRegm" column="pos_regm"/>
+		<result property="posRegd" column="pos_regd"/>
+		<result property="posRegm" column="pos_uptm"/>
+		<result property="posRegd" column="pos_uotd"/>
+		
+	</resultMap>
+
+	<insert id="insertPos" parameterType="posVO">
+
+			INSERT INTO POS
+				( POS_CODE
+				  , POS_NAME
+				  
+				  , POS_USE
+				  , POS_NOTE
+				  , POS_REGM
+				  , POS_REGD )
+			VALUES ( #{posCode}
+				  , #{posName}
+				
+				  , #{posUse}
+				  , #{posNote}
+				  , #{posRegm}
+				  , SYSDATE() )
+
+	</insert>
+
+	<update id="updatePos">
+
+			UPDATE POS
+			SET  POS_CODE=#{posCode}
+				, POS_NAME=#{posName}
+				
+				, POS_USE=#{posUse}
+				, POS_NOTE=#{posNote}
+				, POS_UPTM=#{posUptm}
+				, POS_UPTD=SYSDATE()
+				  WHERE POS_CODE=#{posCode}
+
+	</update>
+
+	<delete id="deletePos">
+
+			DELETE FROM POS
+			WHERE POS_CODE=#{posCode}
+
+	</delete>
+
+	<select id="selectPos" resultMap="posVO">
+
+			SELECT
+				POS_CODE, POS_NAME, POS_USE, POS_NOTE, POS_REGM, POS_REGD
+			FROM POS
+			WHERE POS_CODE=#{posCode}
+
+	</select>
+
+	<select id="selectPosList" parameterType="searchVO" resultType="egovMap">
+
+			SELECT
+				POS_CODE, 
+				POS_NAME, 
+				CASE WHEN POS_USE = 'Y'
+					THEN '사용'
+					ELSE '미사용' 
+				END AS POS_USE
+			FROM POS
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0 and searchUseYn == 0">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'Y'
+					</when>
+		            <when test="searchCondition == 1 and searchUseYn == 0">
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='Y'
+					</when>
+					<when test="searchCondition == 0 and searchUseYn == 1">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'N'
+					</when>
+		            <when test="searchCondition == 1 and searchUseYn == 1">
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='N'
+					</when>
+					
+				</choose>
+			</if>
+			
+			<choose>
+				<when test="searchUseYn == 0">
+					AND POS_USE = 'Y'
+				</when>
+				<when test="searchUseYn == 1">
+					AND POS_USE = 'N'
+				</when>
+			</choose>
+			
+			ORDER BY POS_CODE ASC
+			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+	<select id="selectPosListTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM POS
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0 and searchUseYn == 0">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'Y'
+					</when>
+		            <when test="searchCondition == 1 and searchUseYn == 0">
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='Y'
+					</when>
+					<when test="searchCondition == 0 and searchUseYn == 1">
+						AND	POS_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE = 'N'
+					</when>
+		            <when test="searchCondition == 1 and searchUseYn == 1">
+						AND	POS_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND POS_USE ='N'
+					</when>
+					
+				</choose>
+			</if>
+			<if  test="searchKeyword == null and searchKeyword == ''">
+			<choose>
+				<when test="searchUseYn == 0">
+					AND POS_USE = 'Y'
+				</when>
+				<when test="searchUseYn == 1">
+					AND POS_USE = 'N'
+				</when>
+			</choose>
+			</if>
+	</select>
+
+</mapper>

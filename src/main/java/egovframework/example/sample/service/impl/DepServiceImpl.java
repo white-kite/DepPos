@@ -182,5 +182,9 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public List<?> chartList() throws Exception {
 		return depDAO.chartList();
 	}
+	
+	public List<?> onechartList() throws Exception {
+		return depDAO.onechartList();
+	}
 
 }

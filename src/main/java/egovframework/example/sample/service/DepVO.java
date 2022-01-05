@@ -69,6 +69,8 @@ public class DepVO extends SampleDefaultVO {
 	private String depDown;
 	private String depDocd;
 	
+	private String level;
+	
 
 	
 	
@@ -179,6 +181,14 @@ public class DepVO extends SampleDefaultVO {
 
 	public void setDepDocd(String depDocd) {
 		this.depDocd = depDocd;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 

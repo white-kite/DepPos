@@ -17,6 +17,8 @@
 		<result property="depUpcd" column="dep_upcd"/>
 		<result property="depDown" column="dep_down"/>
 		<result property="depDocd" column="dep_docd"/>
+		
+		<result property="level" column="level"/>
 	</resultMap>
 
 	<insert id="insertDep" parameterType="depVO">
@@ -222,6 +224,21 @@
         	ON A.DEP_CODE = B.DEP_UPDE
         
         	ORDER BY DEP_UPCD;
+	</select>
+	
+	
+	<select id="onechartList" resultMap="depVO">
+			 WITH RECURSIVE DEP_CHART(DEP_NAME, DEP_CODE, DEP_UPDE, LEVEL) AS (
+	SELECT A.DEP_NAME, A.DEP_CODE, A.DEP_UPDE, 0
+		FROM DEP A
+        WHERE A.DEP_UPDE IS NULL
+	UNION ALL
+    SELECT CONCAT('➥',A.DEP_NAME),A.DEP_CODE, A.DEP_UPDE, LEVEL + 1
+		FROM DEP A, DEP_CHART B
+		WHERE A.DEP_UPDE = B.DEP_CODE)
+	SELECT DEP_NAME, DEP_CODE, DEP_UPDE, LEVEL
+		FROM DEP_CHART
+        ORDER BY IFNULL(DEP_UPDE, DEP_CODE), LEVEL;
 	</select>
 	
 

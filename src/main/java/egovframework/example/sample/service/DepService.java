@@ -112,5 +112,7 @@ public interface DepService {
 	
 	List<?> chartList() throws Exception;
 	
+	List<?> onechartList() throws Exception;
+	
 	
 }

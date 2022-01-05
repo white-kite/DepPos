@@ -113,5 +113,6 @@ public interface DepMapper {
 	List<?> updeList() throws Exception;
 	List<?> dodeList(DepVO vo) throws Exception;
 	List<?> chartList() throws Exception;
+	List<?> onechartList() throws Exception;
 
 }

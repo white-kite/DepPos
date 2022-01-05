@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.DepMapper">
+
+	<resultMap id="depVO" type="egovframework.example.sample.service.DepVO">
+		<result property="depCode" column="dep_code"/>
+		<result property="depName" column="dep_name"/>
+		<result property="depUpde" column="dep_upde"/>
+		<result property="depUse" column="dep_use"/>
+		<result property="depNote" column="dep_note"/>
+		<result property="depRegm" column="dep_regm"/>
+		<result property="depRegd" column="dep_regd"/>
+		<result property="depUptm" column="dep_uptm"/>
+		<result property="depUptd" column="dep_uptd"/>
+		
+		<result property="depUp" column="dep_up"/>
+		<result property="depUpcd" column="dep_upcd"/>
+		<result property="depDown" column="dep_down"/>
+		<result property="depDocd" column="dep_docd"/>
+		
+		<result property="level" column="level"/>
+	</resultMap>
+
+	<insert id="insertDep" parameterType="depVO">
+
+			INSERT INTO DEP
+				( DEP_CODE
+				  , DEP_NAME
+				  , DEP_UPDE
+				  , DEP_USE
+				  , DEP_NOTE
+				  , DEP_REGM
+				  , DEP_REGD )
+			VALUES ( #{depCode}
+				  , #{depName}
+				  , NULLIF(#{depUpde},'')
+				  , #{depUse}
+				  , #{depNote}
+				  , #{depRegm}
+				  , SYSDATE() )
+
+	</insert>
+
+	<update id="updateDep">
+
+			UPDATE DEP
+			SET  DEP_CODE=#{depCode}
+				, DEP_NAME=#{depName}
+				, DEP_UPDE=NULLIF(#{depUpde},'')
+				, DEP_USE=#{depUse}
+				, DEP_NOTE=#{depNote}
+				, DEP_UPTM=#{depUptm}
+				, DEP_UPTD=SYSDATE()
+				  WHERE DEP_CODE=#{depCode}
+
+	</update>
+
+	<delete id="deleteDep">
+
+			DELETE FROM DEP
+			WHERE DEP_CODE=#{depCode}
+
+	</delete>
+
+	<select id="selectDep" resultMap="depVO">
+
+			SELECT
+				DEP_CODE, 
+				DEP_NAME, 
+				DEP_UPDE, 
+				DEP_USE, 
+				DEP_NOTE, 
+				DEP_REGM, 
+				DEP_REGD
+			FROM DEP
+			WHERE DEP_CODE=#{depCode}
+
+	</select>
+
+	<select id="selectDepList" parameterType="searchVO" resultType="egovMap">
+
+			SELECT
+				DEP_CODE, 
+				DEP_NAME, 
+				(SELECT DEP_NAME FROM DEP B WHERE A.DEP_UPDE=B.DEP_CODE) AS DEP_UPDE, 
+				CASE WHEN DEP_USE = 'Y'
+					THEN '사용'
+					ELSE '미사용' 
+				END AS DEP_USE
+			FROM DEP A
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 0">
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
+					</when>
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn ==0">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
+					</when>
+					
+					
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 1">
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn == 1">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+					
+				</choose>
+			</if>
+			<choose>
+		        	<when test ="searchUseYn == 0">
+						AND DEP_USE = 'Y'
+					</when>
+					<when test ="searchUseYn == 1">
+						AND DEP_USE = 'N'
+					</when>
+			</choose>
+			
+			
+			
+			ORDER BY DEP_CODE ASC
+			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+	<select id="selectDepListTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM DEP
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 0">
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
+					</when>
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn ==0">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'Y'
+					</when>
+					
+					
+					<when test="searchCondition == 0 and searchKeyword !=null and searchUseYn == 1">
+						AND	DEP_NAME LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+		            <when test="searchCondition == 1 and searchKeyword !=null and searchUseYn == 1">
+						AND DEP_CODE LIKE CONCAT('%', #{searchKeyword},'%')
+						AND DEP_USE = 'N'
+					</when>
+					
+				</choose>
+			</if>
+			
+			<if  test="searchKeyword == null and searchKeyword == ''">
+			<choose>
+		        	<when test ="searchUseYn == 0">
+						AND DEP_USE = 'Y'
+					</when>
+					<when test ="searchUseYn == 1">
+						AND DEP_USE = 'N'
+					</when>
+			</choose>
+			</if>
+	</select>
+	
+	<select id="catchDepList" resultMap="depVO">
+		SELECT DEP_NAME, DEP_CODE
+		FROM DEP
+		WHERE DEP_USE='Y'
+	</select>
+	
+	
+	
+	
+	<select id="selectDepChart" parameterType="searchVO" resultType="egovMap">
+
+			SELECT
+				DEP_CODE, 
+				DEP_NAME, 
+				(SELECT DEP_NAME FROM DEP B WHERE A.DEP_UPDE=B.DEP_CODE) AS DEP_UPDE, 
+				CASE WHEN DEP_USE = 'Y'
+					THEN '사용'
+					ELSE '미사용' 
+				END AS DEP_USE
+			FROM DEP A
+
+			ORDER BY DEP_UPDE DESC
+			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+
+	<select id="selectDepChartTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM DEP
+			
+	</select>
+	
+	<select id="updeList" resultMap="depVO">
+			SELECT DEP_CODE, DEP_NAME, DEP_UPDE 
+			FROM DEP
+			WHERE DEP_UPDE = '';
+	</select>
+	
+	<select id="dodeList" parameterType="depVO" resultMap="depVO">
+			SELECT DEP_NAME, DEP_UPDE 
+			FROM DEP
+			WHERE DEP_UPDE != '' <!-- AND DEP_UPDE=#{depCode} -->
+	</select>
+	
+	
+	<select id="chartList" resultMap="depVO">
+			SELECT 
+				A.DEP_NAME AS DEP_UP,
+       			A.DEP_CODE AS DEP_UPCD,
+        		B.DEP_NAME AS DEP_DOWN,
+        		B.DEP_CODE AS DEP_DOCD
+        
+        	FROM DEP A INNER JOIN DEP B
+        	ON A.DEP_CODE = B.DEP_UPDE
+        
+        	ORDER BY DEP_UPCD;
+	</select>
+	
+	
+	<select id="onechartList" resultMap="depVO">
+			 WITH RECURSIVE DEP_CHART(DEP_NAME, DEP_CODE, DEP_UPDE, LEVEL) AS (
+				 SELECT A.DEP_NAME, A.DEP_CODE, A.DEP_UPDE, 0
+				   FROM DEP A
+			       WHERE A.DEP_UPDE IS NULL
+				UNION ALL
+			     SELECT A.DEP_NAME, LPAD(A.DEP_CODE, 8,'➥'), A.DEP_UPDE, LEVEL + 1
+			   	   FROM DEP A, DEP_CHART B
+				   WHERE A.DEP_UPDE = B.DEP_CODE)
+			    SELECT DEP_NAME, DEP_CODE, DEP_UPDE, LEVEL
+				   FROM DEP_CHART
+       			   ORDER BY IFNULL(DEP_UPDE, DEP_CODE), LEVEL;
+	</select>
+	
+
+</mapper>

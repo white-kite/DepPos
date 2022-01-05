@@ -24,7 +24,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>부서 조직도 조회</title>
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample2.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
     
         
@@ -61,8 +61,10 @@
 	
 	<style type="text/css">
 	
-	
-	
+/* 	input[type="checkbox"]:checked~ul{
+            display:none;
+        }
+	 */
 	
 
 	/*
@@ -81,14 +83,14 @@
     <form:form commandName="depVO" id="detailForm" name="detailForm" method="post">
         <input type="hidden" name="selectedId" />
         <div id="content_pop">
-        	<!-- 타이틀 -->
+        	<!-- 타이틀 
         	<div id="title">
         		<ul>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepList.do">부서 목록 조회</a></li>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepChart.do">부서 조직도 조회</a></li>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/PosList.do">직급 목록 조회</a></li>
         		</ul>
-        	</div>
+        	</div> -->
         	
         	
         
@@ -96,72 +98,36 @@
         	
         </div>
 
-        	<!-- 트리구조 만들기 -->
-        	<div class="menu_tree_management">
-        	<div class="title">부서조직도</div>
-        	
-        	<ul id="tree">
-        	
-        			<li>
-        				<form:checkbox path="" id="first" value=""/>
-        				<label for="root"/>어느부서가 있을까요?
-        				
-        				<ul>
-        				<c:forEach var="updeList" items="${updeList}" varStatus="status">
-        					<li>
-        					<a href="javascript:fn_egov_select('<c:out value="${updeList.depCode}"/>')">
-        					<form:checkbox path="depName" value="depCode" id="second" name="upde"/>
-        						<c:out value="${updeList.depName}"/></a>
-        						<ul class="dodeList">
-        							<c:forEach var="dodeList" items="${dodeList}" varStatus="status">
-        								
-	        								<li>
-	        									
-	        										<c:out value="${dodeList.depName}"/>
-	        									
-	        								</li>
-        								
-        							</c:forEach>
-        						</ul>
-        					</li>
-        				</c:forEach>
-        				</ul>
-        				
-        			</li>
-        			
-        	</ul>
-        	
 
-        	</div>
         	
         	
-        	<!-- 트리구조 만들기 -->
-        	<div class="menu_tree_management">
-        	<div class="title">1쿼리 1부서조직도</div>
+        	<!-- css적용 트리구조 만들기 -->
+        	<div class="menu_tree">
+        	<div class="title">1쿼리 1부서 정렬조직도</div>
         	
-        	<ul id="tree">
+        	<ul>
         	
         			<li>
-        				<form:checkbox path="" id="first" value=""/>
+        				<input type="checkbox" id="one"/>
         				<label for="root"/>어느부서가 있을까요?
         				
         				<ul>
-        				<c:forEach var="chartList" items="${chartList}" varStatus="status">
+        				<c:forEach var="onechartList" items="${onechartList}" varStatus="status">
         					<li>
-        					<a href="javascript:fn_egov_select('<c:out value="${chartList.depUp}"/>')">
-        					<form:checkbox path="depUpcd" value="depUpcd" id="second" name="up"/>
-        						<c:out value="${chartList.depUp}"/></a>
-        						<ul class="chartList">
-        							<%-- <c:forEach var="chartList" items="${chartList}" varStatus="status"> --%>
+        					<a href="javascript:fn_egov_select('<c:out value="${onechartList.depName}"/>')">
+        					<!-- <input type="checkbox" id="two"/> -->
+        						<c:out value="${onechartList.depName}"/></a>
+        						<%--<ul class="onechartList">
+        							 <c:forEach var="chartList" items="${onechartList}" varStatus="status"> 
         								
 	        								<li>
 	        									
-	        										<c:out value="${chartList.depDown}"/>
+	        										<c:out value="${onechartList.depDown}"/>
 	        									
 	        								</li>
         								
-        							<%-- </c:forEach> --%>
-        						</ul>
+        							 </c:forEach> 
+        						</ul> --%>
         					</li>
         				</c:forEach>
         				</ul>

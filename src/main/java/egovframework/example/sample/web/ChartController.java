@@ -143,6 +143,11 @@ public class ChartController {
 		model.addAttribute("chartList",chartList);
 		System.out.println("chartList===="+chartList);
 		
+		
+		List<?> onechartList = depService.onechartList();
+		model.addAttribute("onechartList", onechartList);
+		System.out.println("onechartList===="+onechartList);
+		
 		return "deppos/OnlyDepChart";
 	}
 	
@@ -177,7 +182,70 @@ public class ChartController {
 		return depService.selectDep(depVO);
 	}
 	
+	/**
+	 * DepChart 화면을 조회한다.
+
+	 */
+	@RequestMapping(value = "/ChartFrame.do")
+	public String selectChartFrame(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
+		model.addAttribute("depVO", new DepVO());
+		
+		System.out.println("ChartFrame.do에 들어왔다.");
+		
+		
+		return "deppos/ChartFrame";
+	}
 	
+	
+	
+	@RequestMapping(value = "/whois.do")
+	public String selectWhoList(ModelMap model) throws Exception {
+		model.addAttribute("depVO", new DepVO());
+				
+		return "deppos/whois";
+	}
+	
+	@RequestMapping(value = "/spec.do")
+	public String selectSpecList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
+		model.addAttribute("depVO", new DepVO());
+				
+		return "deppos/spec";
+	}
+	
+	@RequestMapping(value = "/Chart.do")
+	public String selectchart(ModelMap model,DepVO depVO) throws Exception {
+		
+		
+		
+		List<?> updeList = depService.updeList();
+		System.out.println("updeList===="+updeList);
+		model.addAttribute("updeList",updeList);
+		
+		
+		System.out.println("depVO============"+depVO);
+		List<?> dodeList = depService.dodeList(depVO);
+		model.addAttribute("dodeList",dodeList);
+		System.out.println("dodeList===="+dodeList);
+		
+		
+		List<?> chartList = depService.chartList();
+		model.addAttribute("chartList",chartList);
+		System.out.println("chartList===="+chartList);
+		
+		
+		List<?> onechartList = depService.onechartList();
+		model.addAttribute("onechartList", onechartList);
+		System.out.println("onechartList===="+onechartList);
+				
+		return "deppos/Chart";
+	}
+	
+	@RequestMapping(value = "/OnlyMenu.do")
+	public String selectmenuList(DepVO depVO, ModelMap model) throws Exception {
+
+				
+		return "deppos/OnlyMenu";
+	}
 	
 
 }
