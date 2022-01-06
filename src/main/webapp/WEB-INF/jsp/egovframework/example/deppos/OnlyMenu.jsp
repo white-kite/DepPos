@@ -23,59 +23,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>부서 조직도 조회</title>
+    <title>오직 메뉴</title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
-    <script type="text/javaScript" language="javascript" defer="defer">
-    
-        
-        
-        /* listForm에서 detailForm으로 수정, form의 commandName도 depVO */
-        /* 글 목록 화면 function */
-        function fn_egov_selectList() {
-        	document.detailForm.action = "<c:url value='/OnlyDepChart.do'/>";
-           	document.detailForm.submit();
-        }
-        
-        /* pagination 페이지 링크 function */
-        function fn_egov_link_page(pageNo){
-        	document.detailForm.pageIndex.value = pageNo;
-        	document.detailForm.action = "<c:url value='/OnlyDepChart.do'/>";
-           	document.detailForm.submit();
-        }
-        
-    	/*depdode 끌고오기 */
-        function fn_egov_select(id) {
-        	document.detailForm.selectedId.value = id;
-           	document.detailForm.action = "<c:url value='/OpenDepChart.do'/>";
-           	document.detailForm.submit();
-        }
-    	
-    
-       
-        
-    </script>
-    
-
-	
-	
-	
-	<style type="text/css">
-	
-/* 	input[type="checkbox"]:checked~ul{
-            display:none;
-        }
-	 */
-	
-
-	/*
-	#tree.form:checkbox checked~ul{
-	display:none;
-	}
-	*/
-     /* .hide {
-         display: none;
-     } */
-	</style>
 
 </head>
 
@@ -95,6 +44,8 @@
          			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a onclick="parent.location.href='/DepPos/OnlyDepChart.do'">부서 조직도 조회</a></li>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a onclick="parent.location.href='/DepPos/Chart.do'">부서 이것저것 조회</a></li>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a onclick="parent.location.href='/DepPos/ChartFrame.do'">부서 조직도 프레임 조회</a></li>
+        			
+
         		</ul>
         	
         

@@ -184,7 +184,6 @@ public class ChartController {
 	
 	/**
 	 * DepChart 화면을 조회한다.
-
 	 */
 	@RequestMapping(value = "/ChartFrame.do")
 	public String selectChartFrame(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
@@ -198,10 +197,18 @@ public class ChartController {
 	
 	
 	
+	/**
+	 * whois.jsp를 조회한다.
+	 */
 	@RequestMapping(value = "/whois.do")
-	public String selectWhoList(ModelMap model) throws Exception {
-		model.addAttribute("depVO", new DepVO());
-				
+	public String selectWhoList(ModelMap model, DepVO depVO) throws Exception {
+		
+		List<?> whoisList = depService.whoisList(depVO);
+		System.out.println("whoisList===="+whoisList);
+		model.addAttribute("whoisList",whoisList);
+		
+		
+		
 		return "deppos/whois";
 	}
 	
@@ -212,6 +219,17 @@ public class ChartController {
 		return "deppos/spec";
 	}
 	
+	
+	@RequestMapping(value = "/OnlyMenu.do")
+	public String selectmenuList(DepVO depVO, ModelMap model) throws Exception {
+
+				
+		return "deppos/OnlyMenu";
+	}
+	
+	
+	
+	/*Chart.do는 실험체*/
 	@RequestMapping(value = "/Chart.do")
 	public String selectchart(ModelMap model,DepVO depVO) throws Exception {
 		
@@ -240,12 +258,7 @@ public class ChartController {
 		return "deppos/Chart";
 	}
 	
-	@RequestMapping(value = "/OnlyMenu.do")
-	public String selectmenuList(DepVO depVO, ModelMap model) throws Exception {
 
-				
-		return "deppos/OnlyMenu";
-	}
 	
 
 }

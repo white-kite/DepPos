@@ -71,6 +71,10 @@ public class DepVO extends SampleDefaultVO {
 	
 	private String level;
 	
+	/**부서에 누가 있는지 알기 위한 변수*/
+	
+	private String empName;
+	
 
 	
 	
@@ -189,6 +193,14 @@ public class DepVO extends SampleDefaultVO {
 
 	public void setLevel(String level) {
 		this.level = level;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
 

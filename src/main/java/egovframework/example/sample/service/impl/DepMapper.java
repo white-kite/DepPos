@@ -114,5 +114,7 @@ public interface DepMapper {
 	List<?> dodeList(DepVO vo) throws Exception;
 	List<?> chartList() throws Exception;
 	List<?> onechartList() throws Exception;
-
+	
+	/*부서에 누가 있는지 알기 위해*/
+	List<?> whoisList(DepVO vo) throws Exception;
 }

@@ -186,5 +186,10 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public List<?> onechartList() throws Exception {
 		return depDAO.onechartList();
 	}
+	
+	/*부서에 누가 있는지 알기 위해*/
+	public List<?> whoisList(DepVO vo) throws Exception {
+		return depDAO.dodeList(vo);
+	}
 
 }

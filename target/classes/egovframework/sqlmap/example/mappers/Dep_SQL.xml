@@ -19,6 +19,9 @@
 		<result property="depDocd" column="dep_docd"/>
 		
 		<result property="level" column="level"/>
+		
+		<result property="empName" column="emp_name"/>
+		
 	</resultMap>
 
 	<insert id="insertDep" parameterType="depVO">
@@ -239,6 +242,11 @@
 	SELECT DEP_NAME, DEP_CODE, DEP_UPDE, LEVEL
 		FROM DEP_CHART
         ORDER BY IFNULL(DEP_UPDE, DEP_CODE), LEVEL;
+	</select>
+	
+	
+	<select id="whoisList" resultMap="depVO">
+		SELECT EMP_NAME FROM employee WHERE EMP_DEPT=#{depCode}';
 	</select>
 	
 
