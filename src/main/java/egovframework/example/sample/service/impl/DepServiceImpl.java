@@ -191,5 +191,21 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	public List<?> whoisList(DepVO vo) throws Exception {
 		return depDAO.dodeList(vo);
 	}
+	
+	/**
+	 * 부서원을 조회한다.
+	 * @param vo - 조회할 정보가 담긴 DepVO
+	 * @return 조회한 글
+	 * @exception Exception
+	 */
+	@Override
+	public DepVO selectWho(DepVO vo) throws Exception {
+		DepVO resultVO = depDAO.selectWho(vo);
+		if (resultVO == null)
+			throw processException("info.nodata.msg");
+		return resultVO;
+	}
+	
+	
 
 }

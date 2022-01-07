@@ -249,5 +249,9 @@
 		SELECT EMP_NAME FROM employee WHERE EMP_DEPT=#{depCode}';
 	</select>
 	
+	<select id="selectWho" resultMap="depVO">
+		SELECT EMP_NAME FROM employee WHERE EMP_DEPT=#{depCode}';
+	</select>
+	
 
 </mapper>

@@ -3,6 +3,8 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+
 <%
   /**
   * @Class Name : DepChart.jsp
@@ -25,6 +27,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>부서 조직도 조회</title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample2.css'/>"/>
+    
+    <!--Ajax Tags-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/prototype.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/scriptaculous/scriptaculous.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/overlibmws/overlibmws.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/ajaxtags.js"></script>
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ajaxtags/css/ajaxtags.css" />
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ajaxtags/css/displaytag.css" />
+    
     <script type="text/javaScript" language="javascript" defer="defer">
     
         
@@ -43,13 +54,26 @@
            	document.detailForm.submit();
         }
         
-    	/*depdode 끌고오기 */
-        function fn_egov_select(id) {
+    	/*누가 있는지 끌고오기 */
+        function fn_wholist_select(id) {
         	document.detailForm.selectedId.value = id;
            	document.detailForm.action = "<c:url value='/OpenDepChart.do'/>";
            	document.detailForm.submit();
         }
     	
+    	
+    	
+      /*   $('.number').click(function(){
+            var id_check = $(this).attr("id");
+        }); */
+    	
+    	
+        $("a").click(function(){
+        	var url="OpenDepChart.do";
+        	var params="param1="+param1+
+        })
+
+
     
        
         
@@ -114,8 +138,8 @@
         				<ul>
         				<c:forEach var="onechartList" items="${onechartList}" varStatus="status">
         					<li>
-        					<a href="javascript:fn_egov_select('<c:out value="${onechartList.depName}"/>')">
-        					<!-- <input type="checkbox" id="two"/> -->
+        					<a href="javascript:fn_wholist_select('<c:out value="${onechartList.depName}"/>')" target="center" >
+        					<input type="checkbox" id="two" name="depName" value="<c:out value="${onechartList.depName}"/>"/>
         						<c:out value="${onechartList.depName}"/></a>
         						<%--<ul class="onechartList">
         							 <c:forEach var="chartList" items="${onechartList}" varStatus="status"> 

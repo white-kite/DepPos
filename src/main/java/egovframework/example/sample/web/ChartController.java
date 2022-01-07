@@ -120,7 +120,8 @@ public class ChartController {
 	
 	
 	@RequestMapping(value = "/OnlyDepChart.do")
-	public String selectOnlyDepChart(ModelMap model, DepVO depVO) throws Exception {
+	public String selectOnlyDepChart( ModelMap model, DepVO depVO) throws Exception {
+		
 		
 		/*for(int 0; i<sitemap.size(); i) {
 			System.out.pringln("1>>"sitemap.get(i).getMenuMn())
@@ -153,15 +154,7 @@ public class ChartController {
 	
 	
 	
-	@RequestMapping("/OpenDepChart.do")
-	public String updateDepView(@RequestParam("selectedId") String id, Model model) throws Exception {
-		System.out.println("OpenDepChart에 들어왔다.");
-		DepVO depVO = new DepVO();
-		depVO.setDepCode(id);
-		// 변수명은 CoC 에 따라 depVO
-		model.addAttribute(selectDode(depVO, model));
-		return "deppos/OnlyDepChart";
-	}
+
 	
 	
 	public DepVO selectDode(DepVO depVO, Model model) throws Exception {
@@ -198,10 +191,45 @@ public class ChartController {
 	
 	
 	/**
+	 * 글 수정화면을 조회한다.
+	 * @param id - 수정할 글 id
+	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
+	 * @param model
+	 * @return "egovSampleRegister"
+	 * @exception Exception
+	 */
+	@RequestMapping("/OpenDepChart.do")
+	public String updateDepView(@RequestParam("selectedId") String id, Model model) throws Exception {
+		System.out.println("OpemDepChart에 들어왔다.");
+		DepVO depVO = new DepVO();
+		depVO.setDepCode(id);
+		// 변수명은 CoC 에 따라 depVO
+		model.addAttribute(selectWho(depVO, model));
+		return "deppos/whois";
+	}
+
+	/**
+	 * 글을 조회한다.
+	 * @param depVO - 조회할 정보가 담긴 VO
+	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
+	 * @param status
+	 * @return @ModelAttribute("depVO") - 조회한 정보
+	 * @exception Exception
+	 */
+	public DepVO selectWho(DepVO depVO, Model model) throws Exception {
+		System.out.println("selectWho에 들어왔다.");
+		model.addAttribute("depVO", depVO);
+		
+		
+		return depService.selectWho(depVO);
+	}
+	
+	
+	/**
 	 * whois.jsp를 조회한다.
 	 */
 	@RequestMapping(value = "/whois.do")
-	public String selectWhoList(ModelMap model, DepVO depVO) throws Exception {
+	public String selectWhoisList(ModelMap model, DepVO depVO) throws Exception {
 		
 		List<?> whoisList = depService.whoisList(depVO);
 		System.out.println("whoisList===="+whoisList);
@@ -211,6 +239,11 @@ public class ChartController {
 		
 		return "deppos/whois";
 	}
+	
+	
+
+	
+	
 	
 	@RequestMapping(value = "/spec.do")
 	public String selectSpecList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {

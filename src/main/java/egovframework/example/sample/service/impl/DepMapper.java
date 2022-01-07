@@ -117,4 +117,12 @@ public interface DepMapper {
 	
 	/*부서에 누가 있는지 알기 위해*/
 	List<?> whoisList(DepVO vo) throws Exception;
+	
+	/**
+	 * 부서원을 조회한다.
+	 * @param vo - 조회할 정보가 담긴 DepVO
+	 * @return 조회한 글
+	 * @exception Exception
+	 */
+	DepVO selectWho(DepVO vo) throws Exception;
 }

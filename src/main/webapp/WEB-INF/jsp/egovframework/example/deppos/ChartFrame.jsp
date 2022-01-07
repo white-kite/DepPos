@@ -10,8 +10,8 @@
 	<frame src='OnlyMenu.do' name='menu'>
 <frameset rows="*" cols="300,800,*" frameborder="Yes" border="0">
 	<frame src='OnlyDepChart.do' name='left' scrolling="AUTO" noresize>
-	<frame src='whois.do' name='center'>
-	<frame src='spec.do' name='right'>
+	<frame src='whois.do' name='center' noresize>
+	<frame src='spec.do' name='right'noresize>
 </frameset>
 </frameset>
 <body>
