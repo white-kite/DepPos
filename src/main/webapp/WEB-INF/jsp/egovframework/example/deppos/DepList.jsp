@@ -24,13 +24,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>부서목록 조회</title>
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/style.css'/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/style.css'/>"/>
     <script type="text/javaScript" language="javascript" defer="defer">
         
         /* 글 수정 화면 function */
         function fn_egov_select(id) {
         	document.listForm.selectedId.value = id;
-            window.open("<c:url value='/updateDepView.do?selectedId="+id+"'/>", "", "width=750, height=350, left=100, top=50");
+            window.open("<c:url value='/updateDepView.do?selectedId="+id+"'/>", "", "width=770, height=500, left=100, top=50");
             document.listForm.submit();
         	
         	/* document.listForm.selectedId.value = id;
@@ -40,7 +40,7 @@
         
         /* 글 등록 화면 function */
         function fn_egov_addView() {
-        	window.open("<c:url value='/addDep.do'/>", "depreg", "width=750, height=350, left=100, top=50");
+        	window.open("<c:url value='/addDep.do'/>", "depreg", "width=770, height=500, left=100, top=50");
         	document.listForm.submit();
            	/* document.listForm.action = "<c:url value='/addDep.do'/>";
            	document.listForm.submit(); */
@@ -260,6 +260,14 @@ function newColour() {
 }
 // ]]>
 </script>
+
+	<!-- 출처: https://cheonfamily.tistory.com/7 [천리길도 한 걸음부터] 
+	브라우저 타이틀 맨 왼쪽에 보면 있는 아이콘이 없거나 경로가 맞지 않으면 뜨는 오류 제거 코드
+	http://localhost:8080/favicon.ico 404 를 없애준다.-->
+	<link rel="shortcut icon" href="#"/>
+	
+	
+	
 </head>
 
 <body>
@@ -287,10 +295,15 @@ function newColour() {
         				<label for="SearchField2">검색구분</label>
         				&nbsp; &nbsp;
         			   <%--  <label for="searchCondition" style="visibility:hidden;"><spring:message code="search.choose" /></label> --%>
-        				<form:select path="searchCondition" name="searchCondition" id="searchCondition" style="width:100px">
+        				<%-- <form:select path="searchCondition" name="SearchField2" id="SearchField2" style="width:100px">
         					<form:option value="0" label="부서명" />
         					<form:option value="1" label="부서코드" />
-        				</form:select>
+        				</form:select> --%>
+        				
+        				<select name="SearchField2" id="SearchField2" style="width:100px">
+			                <option value="0">부서명</option>
+			                <option value="1">부서코드</option>
+        				</select>
         			&nbsp;
         			<label for="SearchField2">검색어 입력</label>
         				&nbsp; &nbsp;
@@ -302,8 +315,14 @@ function newColour() {
         			<label for="SearchField2">사용여부</label>
         				&nbsp; &nbsp;
         			
-        					<form:radiobutton path="searchUseYn" value="0"  label="사용" checked="checked" /> &nbsp; &nbsp;
-        					<form:radiobutton path="searchUseYn" value="1" label="미사용"/>
+        					<form:radiobutton path="searchUseYn" value="0" label=" 사용" checked="checked" id="radio_01" name="radio_01" class="check" />  &nbsp; &nbsp;
+        					<form:radiobutton path="searchUseYn" value="1" label=" 미사용" id="radio_02" name="radio_02" class="check"/>
+        					
+        					<%-- <form:radiobutton path="searchUseYn" value="0" checked="checked" id="radio_01" name="radio_01" class="check" />
+        					<label for="radio_01">사용</label>
+        					 &nbsp; &nbsp;
+        					<form:radiobutton path="searchUseYn" value="1"ㄴ id="radio_02" name="radio_02" class="check"/>
+        					<label for="radio_02">미사용</label> --%>
         					
         			</li>
                 </ul>
@@ -326,13 +345,13 @@ function newColour() {
         	
         	<!-- <div id="table"> -->
         		<div class="align_multi mgt10 mgb10">
-        		<table class="tbl_board_list tr_hover" summary="부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블">
+        		<table class="tbl_board_list" summary="부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블">
         			<caption style="visibility:hidden">부서코드, 부서명, 상위부서명, 사용여부 표시하는 테이블</caption>
         			<colgroup>
         				<col width="40"/>
-        				<col width="100"/>
-        				<col width="150"/>
-        				<col width="150"/>
+        				<col width="250"/>
+        				<col width="250"/>
+        				<col width="200"/>
         				<col width="?"/>
         				
         			</colgroup>

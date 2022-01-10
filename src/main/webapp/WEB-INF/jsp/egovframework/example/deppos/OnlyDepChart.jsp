@@ -54,26 +54,29 @@
            	document.detailForm.submit();
         }
         
-    	/*누가 있는지 끌고오기 */
+    	/*누가 있는지 끌고오기
         function fn_wholist_select(id) {
-        	document.detailForm.selectedId.value = id;
+        	document.detailForm.selectedId.value = id; // 재직여부 Y/N
            	document.detailForm.action = "<c:url value='/OpenDepChart.do'/>";
            	document.detailForm.submit();
-        }
+        } */
     	
     	
     	
-      /*   $('.number').click(function(){
-            var id_check = $(this).attr("id");
-        }); */
-    	
-    	
-        $("a").click(function(){
-        	var url="OpenDepChart.do";
-        	var params="param1="+param1+
+        
+        /*누가 있는지 끌고오기 */
+        
+        $("#who").click(()=>{
+        	$.ajax({
+        		
+        		
+        		type:"POST", //전송방식
+        		url:"./whois.do", //결과 출력 화면
+        		data:"depCode", //파라미터 값
+        		success: (log)=>{alert("성공"+log)},
+        		error: (log)=>{alert("실패"+log)},
+        	})
         })
-
-
     
        
         
@@ -138,7 +141,8 @@
         				<ul>
         				<c:forEach var="onechartList" items="${onechartList}" varStatus="status">
         					<li>
-        					<a href="javascript:fn_wholist_select('<c:out value="${onechartList.depName}"/>')" target="center" >
+        					<%-- <a id="who" href="javascript:fn_wholist_select('<c:out value="${onechartList.depCode}"/>')" target="center" > --%>
+        					<a id="who">
         					<input type="checkbox" id="two" name="depName" value="<c:out value="${onechartList.depName}"/>"/>
         						<c:out value="${onechartList.depName}"/></a>
         						<%--<ul class="onechartList">
