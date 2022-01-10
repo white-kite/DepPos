@@ -4,9 +4,9 @@
 <sqlMap namespace="Dep">
 
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
-	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.deppos.service.SampleDefaultVO"/>
 
-	<resultMap id="dep" class="egovframework.example.sample.service.DepVO">
+	<resultMap id="dep" class="egovframework.example.deppos.service.DepVO">
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="description" column="description"/>

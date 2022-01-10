@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="egovframework.example.sample.service.impl.DepMapper">
+<mapper namespace="egovframework.example.deppos.service.impl.DepMapper">
 
-	<resultMap id="depVO" type="egovframework.example.sample.service.DepVO">
+	<resultMap id="depVO" type="egovframework.example.deppos.service.DepVO">
 		<result property="depCode" column="dep_code"/>
 		<result property="depName" column="dep_name"/>
 		<result property="depUpde" column="dep_upde"/>

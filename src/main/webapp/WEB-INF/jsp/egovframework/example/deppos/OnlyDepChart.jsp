@@ -74,7 +74,7 @@
         		url:"./whois.do", //결과 출력 화면
         		data:"depCode", //파라미터 값
         		success: (log)=>{alert("성공"+log)},
-        		error: (log)=>{alert("실패"+log)},
+        		error: (log)=>{alert("실패"+log)}
         	})
         })
     
