@@ -29,12 +29,11 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample2.css'/>"/>
     
     <!--Ajax Tags-->
-	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/prototype.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/scriptaculous/scriptaculous.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/overlibmws/overlibmws.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/ajaxtags/js/ajaxtags.js"></script>
-	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ajaxtags/css/ajaxtags.css" />
-	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ajaxtags/css/displaytag.css" />
+
+	
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous"></script>
+    
+    
     
     <script type="text/javaScript" language="javascript" defer="defer">
     
@@ -54,55 +53,14 @@
            	document.detailForm.submit();
         }
         
-    	/*누가 있는지 끌고오기
-        function fn_wholist_select(id) {
-        	document.detailForm.selectedId.value = id; // 재직여부 Y/N
-           	document.detailForm.action = "<c:url value='/OpenDepChart.do'/>";
-           	document.detailForm.submit();
-        } */
-    	
-    	
-    	
-        
-        /*누가 있는지 끌고오기 */
-        
-        $("#who").click(()=>{
-        	$.ajax({
-        		
-        		
-        		type:"POST", //전송방식
-        		url:"./whois.do", //결과 출력 화면
-        		data:"depCode", //파라미터 값
-        		success: (log)=>{alert("성공"+log)},
-        		error: (log)=>{alert("실패"+log)}
-        	})
-        })
+	</script>
     
-       
-        
-    </script>
-    
+    <!-- 출처: https://cheonfamily.tistory.com/7 [천리길도 한 걸음부터] 
+	브라우저 타이틀 맨 왼쪽에 보면 있는 아이콘이 없거나 경로가 맞지 않으면 뜨는 오류 제거 코드 head에 추가,
+	http://localhost:8080/favicon.ico 404 를 없애준다.-->
+	<link rel="shortcut icon" href="#"/>
 
-	
-	
-	
-	<style type="text/css">
-	
-/* 	input[type="checkbox"]:checked~ul{
-            display:none;
-        }
-	 */
-	
 
-	/*
-	#tree.form:checkbox checked~ul{
-	display:none;
-	}
-	*/
-     /* .hide {
-         display: none;
-     } */
-	</style>
 
 </head>
 
@@ -110,23 +68,12 @@
     <form:form commandName="depVO" id="detailForm" name="detailForm" method="post">
         <input type="hidden" name="selectedId" />
         <div id="content_pop">
-        	<!-- 타이틀 
-        	<div id="title">
-        		<ul>
-        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepList.do">부서 목록 조회</a></li>
-        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/DepChart.do">부서 조직도 조회</a></li>
-        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/PosList.do">직급 목록 조회</a></li>
-        		</ul>
-        	</div> -->
-        	
-        	
-        
+
         	<!-- List -->
         	
         </div>
 
 
-        	
         	
         	<!-- css적용 트리구조 만들기 -->
         	<div class="menu_tree">
@@ -142,20 +89,10 @@
         				<c:forEach var="onechartList" items="${onechartList}" varStatus="status">
         					<li>
         					<%-- <a id="who" href="javascript:fn_wholist_select('<c:out value="${onechartList.depCode}"/>')" target="center" > --%>
-        					<a id="who">
-        					<input type="checkbox" id="two" name="depName" value="<c:out value="${onechartList.depName}"/>"/>
-        						<c:out value="${onechartList.depName}"/></a>
-        						<%--<ul class="onechartList">
-        							 <c:forEach var="chartList" items="${onechartList}" varStatus="status"> 
-        								
-	        								<li>
-	        									
-	        										<c:out value="${onechartList.depDown}"/>
-	        									
-	        								</li>
-        								
-        							 </c:forEach> 
-        						</ul> --%>
+        					
+        					<a class="who" href="<c:url value='/whois.do'/>" onclick="javascript:testAjax('<c:out value="${onechartList.depCode}"/>')"  target="center"><c:out value="${onechartList.depName}"/></a>
+        					
+
         					</li>
         				</c:forEach>
         				</ul>
@@ -166,7 +103,29 @@
         	
 
         	</div>
-        	
+
+			<script >
+			  function testAjax(data) {
+			
+				 console.log("data",data);
+			
+			  	$.ajax({
+					type : 'post',
+					data : {depCode : data},
+					url : "<c:url value='/whois.do'/>",
+					success: function(data) {
+					          console.log("data===",data);
+					         
+					          
+					      },
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			}  
+			 
+			 
+			</script>        	
         	
         	<!-- /List -->
         	

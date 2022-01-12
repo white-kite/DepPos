@@ -31,6 +31,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -225,23 +226,49 @@ public class ChartController {
 	}
 	
 	
+	
+
+
+	
 	/**
 	 * whois.jsp를 조회한다.
 	 */
-	@RequestMapping(value = "/whois.do")
-	public String selectWhoisList(ModelMap model, DepVO depVO) throws Exception {
-		
-		List<?> whoisList = depService.whoisList(depVO);
+	@RequestMapping(value = "/whois.do", method = RequestMethod.POST)
+	
+	public String selectWhoisList(@RequestParam("depCode") String depCode, ModelMap model) throws Exception {
+		if(depCode ==null || depCode == "") {
+			System.out.println("12345678");
+			return "";
+		}
+		System.out.println("whois.do POST에 들어왔다");
+
+		List<?> whoisList = depService.whoisList(depCode);
 		System.out.println("whoisList===="+whoisList);
 		model.addAttribute("whoisList",whoisList);
 		
-		
-		
+
+
 		return "deppos/whois";
 	}
 	
 	
-
+	
+/*	얘가 초기 whois.do*/
+	@RequestMapping(value = "/whois.do", method = RequestMethod.GET)
+	public String selectWhoList(ModelMap model) throws Exception {
+		model.addAttribute("depCode", new DepVO());
+				
+		return "deppos/whois";
+	}
+	
+/*	얘가 초기 whois.do
+ *  @RequestMapping(value = "/whois.do")
+	public String selectWhoList(ModelMap model) throws Exception {
+		model.addAttribute("depVO", new DepVO());
+				
+		return "deppos/whois";
+	}
+	*/
 	
 	
 	

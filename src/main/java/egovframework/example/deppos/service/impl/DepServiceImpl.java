@@ -188,10 +188,7 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 	}
 	
 	/*부서에 누가 있는지 알기 위해*/
-	public List<?> whoisList(DepVO vo) throws Exception {
-		return depDAO.dodeList(vo);
-	}
-	
+		
 	/**
 	 * 부서원을 조회한다.
 	 * @param vo - 조회할 정보가 담긴 DepVO
@@ -204,6 +201,18 @@ public class DepServiceImpl extends EgovAbstractServiceImpl implements DepServic
 		if (resultVO == null)
 			throw processException("info.nodata.msg");
 		return resultVO;
+	}
+	
+	/*@Override
+	public List<?> whoisList(DepVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return depDAO.whoisList(vo);
+	}*/
+
+	@Override
+	public List<?> whoisList(String depCode) throws Exception {
+		// TODO Auto-generated method stub
+		return depDAO.whoisList(depCode);
 	}
 	
 	

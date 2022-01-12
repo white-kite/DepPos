@@ -17,6 +17,8 @@ package egovframework.example.deppos.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import egovframework.example.deppos.service.SampleDefaultVO;
 import egovframework.example.deppos.service.DepVO;
 
@@ -116,7 +118,8 @@ public interface DepMapper {
 	List<?> onechartList() throws Exception;
 	
 	/*부서에 누가 있는지 알기 위해*/
-	List<?> whoisList(DepVO vo) throws Exception;
+	/*List<?> whoisList(DepVO vo) throws Exception;*/
+	List<?> whoisList(@Param("depCode")String depCode) throws Exception;
 	
 	/**
 	 * 부서원을 조회한다.

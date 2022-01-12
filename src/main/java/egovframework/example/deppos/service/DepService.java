@@ -115,7 +115,9 @@ public interface DepService {
 	List<?> onechartList() throws Exception;
 	
 	/*부서에 누가 있는지 알기 위해*/
-	List<?> whoisList(DepVO vo) throws Exception;
+	/*List<?> whoisList(DepVO vo) throws Exception;*/
+	
+	List<?> whoisList(String depCode) throws Exception;
 	
 	/**
 	 * 부서원을 조회한다.
