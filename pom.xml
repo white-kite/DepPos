@@ -148,17 +148,12 @@
         </dependency>
         -->
         
-        
-        <!-- 아래 코드 출처: https://toyuq.tistory.com/202 [Goni] 
-        jackson을 추가해야 화면에 json으로 던질 수 있다?-->
-        
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
-
+	   <!-- jackson -->
+		<dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-databind</artifactId>
+		  <version>2.7.0</version>
 		</dependency>
-		
 		
 		<!-- 아래 코드 출처 : https://tychejin.tistory.com/136?category=768571
 		 -->

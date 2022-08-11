@@ -16,7 +16,6 @@
 package egovframework.example.deppos.web;
 
 import java.util.List;
-
 import egovframework.example.deppos.service.DepService;
 import egovframework.example.deppos.service.SampleDefaultVO;
 import egovframework.example.deppos.service.DepVO;
@@ -25,17 +24,17 @@ import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 import javax.annotation.Resource;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
@@ -123,11 +122,6 @@ public class ChartController {
 	@RequestMapping(value = "/OnlyDepChart.do")
 	public String selectOnlyDepChart( ModelMap model, DepVO depVO) throws Exception {
 		
-		
-		/*for(int 0; i<sitemap.size(); i) {
-			System.out.pringln("1>>"sitemap.get(i).getMenuMn())
-		}*/
-
 		/*상위부서와 하위부서 출력을 위해*/
 		
 		List<?> updeList = depService.updeList();
@@ -150,6 +144,7 @@ public class ChartController {
 		model.addAttribute("onechartList", onechartList);
 		System.out.println("onechartList===="+onechartList);
 		
+
 		return "deppos/OnlyDepChart";
 	}
 	
@@ -189,51 +184,66 @@ public class ChartController {
 		return "deppos/ChartFrame";
 	}
 	
-	
-	
-	/**
-	 * 글 수정화면을 조회한다.
-	 * @param id - 수정할 글 id
-	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
-	 * @param model
-	 * @return "egovSampleRegister"
-	 * @exception Exception
-	 */
-	@RequestMapping("/OpenDepChart.do")
-	public String updateDepView(@RequestParam("selectedId") String id, Model model) throws Exception {
-		System.out.println("OpemDepChart에 들어왔다.");
-		DepVO depVO = new DepVO();
-		depVO.setDepCode(id);
-		// 변수명은 CoC 에 따라 depVO
-		model.addAttribute(selectWho(depVO, model));
-		return "deppos/whois";
-	}
-
-	/**
-	 * 글을 조회한다.
-	 * @param depVO - 조회할 정보가 담긴 VO
-	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
-	 * @param status
-	 * @return @ModelAttribute("depVO") - 조회한 정보
-	 * @exception Exception
-	 */
-	public DepVO selectWho(DepVO depVO, Model model) throws Exception {
-		System.out.println("selectWho에 들어왔다.");
-		model.addAttribute("depVO", depVO);
 		
-		
-		return depService.selectWho(depVO);
-	}
-	
-	
-	
 
 
 	
 	/**
 	 * whois.jsp를 조회한다.
 	 */
-	@RequestMapping(value = "/whois.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/whois.do")
+	public ModelAndView selectWhoisList(@RequestParam("depCode") String depCode, ModelMap model) throws Exception {
+
+		System.err.println("whois.do POST에 들어왔다");
+
+		//List<?> whoisList = depService.whoisList(depCode);
+		//System.out.println("whoisList===="+whoisList);
+		//model.addAttribute("whoisList",whoisList);
+		
+		
+		ModelAndView view = new ModelAndView();
+		view.setViewName("jsonView");
+		System.err.println("11");
+		view.addObject("result","ok");
+		
+		
+		return view;
+	} 권차장님*/
+	
+	/*
+	@Autowired
+	private MappingJackson2JsonView jsonView;
+	
+	@RequestMapping(value="/whois.do")
+	@ResponseBody
+	public ModelAndView selectWhoisList(@RequestParam("depCode") String depCode, ModelMap model) throws Exception {
+		//Map<String, Object> resultMap = depService.whoisList(depCode);
+		//List<?> whoisList = depService.whoisList(depCode);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		//modelAndView.addObject("whoisList", whoisList);
+		modelAndView.setView(jsonView);
+		return modelAndView;
+		
+	}
+	*/
+	
+	
+	@RequestMapping(value="/whois.do")
+	@ResponseBody
+	public ModelAndView selectWhoisList(@RequestParam(value="depCode") String depCode, Model model) throws Exception {
+		depService.whoisList(depCode);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		List<?> whoisList = depService.whoisList(depCode);
+		modelAndView.addObject("whoisList",whoisList);
+		modelAndView.setViewName("jsonView");
+		
+		return modelAndView;
+	}
+	
+	
+/*	@RequestMapping(value = "/whois.do", method = RequestMethod.POST)
 	
 	public String selectWhoisList(@RequestParam("depCode") String depCode, ModelMap model) throws Exception {
 		if(depCode ==null || depCode == "") {
@@ -248,18 +258,21 @@ public class ChartController {
 		
 
 
-		return "deppos/whois";
+		return "redirect:OnlyDepChart.do";
 	}
+	이전에 쓰던 코드*/
+	
 	
 	
 	
 /*	얘가 초기 whois.do*/
-	@RequestMapping(value = "/whois.do", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/whois.do", method = RequestMethod.GET)
 	public String selectWhoList(ModelMap model) throws Exception {
 		model.addAttribute("depCode", new DepVO());
+		
 				
 		return "deppos/whois";
-	}
+	}*/
 	
 /*	얘가 초기 whois.do
  *  @RequestMapping(value = "/whois.do")
@@ -270,6 +283,19 @@ public class ChartController {
 	}
 	*/
 	
+
+/*	@RequestMapping(value="/requestObject", method=RequestMethod.POST)
+	public List<?> requestObject(@RequestBody whoisList whoisList) {
+		
+		System.out.println("whois.do POST에 들어왔다");
+
+		List<?> whoisList = depService.whoisList(depCode);
+		System.out.println("whoisList===="+whoisList);
+		model.addAttribute("whoisList",whoisList);
+		
+		return whoisList;
+	}
+	*/
 	
 	
 	@RequestMapping(value = "/spec.do")

@@ -141,6 +141,8 @@
         	
         		<ul>
         			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/OnlyDepChart.do">부서 조직도 조회</a></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/Chart.do">부서 이것저것 조회</a></li>
+        			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/><a href="/DepPos/ChartFrame.do">부서 조직도 프레임 조회</a></li>
         		</ul>
         		
         	<!-- List -->
@@ -191,7 +193,7 @@
         				<ul>
         				<c:forEach var="updeList" items="${updeList}" varStatus="status">
         					<li>
-        					<form:checkbox path="depName" value="depCode" id="second"/>
+        					<%-- <form:checkbox path="depName" value="depCode" id="second"/> --%>
         						<a><c:out value="${updeList.depName}"/></a>
         						<ul class="dodeList">
         							<c:forEach var="dodeList" items="${dodeList}" varStatus="status">

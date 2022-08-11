@@ -160,16 +160,19 @@ input.essentiality  {height:18px; background-color:#ebebeb; border:1px solid #BC
 
 /*메뉴트리 영역설정*/
 .menu_tree_management {
+  margin:0 0 10px 0;
   float:left;
   border: 1px solid #f1f1f1;
   display: inline-block;
   box-sizing: border-box;
   padding: 30px;
   background: #f9f9f9;
+  text-align:left;
 }
 
 /*타이틀 스타일링 */
 .menu_tree_management .title {
+  margin:0 0 10px 0; padding:0 0 0 0;
   height: 18px;
   line-height: 18px;
   margin-bottom: 20px;
@@ -180,3 +183,31 @@ input.essentiality  {height:18px; background-color:#ebebeb; border:1px solid #BC
 .menu_tree_management.input[type="checkbox"]:checked~ul{
             display:none;
         }
+        
+        
+/*메뉴트리 영역설정*/
+.menu_tree{
+  margin:0 0 10px 0;
+  float:left;
+  border: 1px solid #f1f1f1;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 30px;
+  background: #f9f9f9;
+  text-align:left;
+}
+
+/*타이틀 스타일링 */
+.menu_tree.title{
+  margin:0 0 10px 0; padding:0 0 0 0;
+  height: 18px;
+  line-height: 18px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.menu_tree.input[type="checkbox"]:checked~ul{
+            display:none;
+        }
+

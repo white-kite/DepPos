@@ -93,8 +93,7 @@
     	<div id="title">
     		<ul>
     			<li>
-                    <%-- <c:if test="${registerFlag == 'create'}"><spring:message code="button.create" /></c:if>
-                    <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if> --%>
+
                     <c:if test="${registerFlag == 'create'}"><h4 class="sub_depth01">글쓰기</h4></c:if>
                     <c:if test="${registerFlag == 'modify'}"><h4 class="sub_depth01">글수정</h4></c:if>
                 </li>
@@ -107,14 +106,8 @@
     			<col width="80"/>
     			<col width="200"/>
     		</colgroup>
-    		<%-- <c:if test="${registerFlag == 'modify'}">
-        		<tr>
-        			<td ><label for="depCode">부서코드</label></td>
-        			<td >
-        				<form:input path="depCode" cssClass="essentiality" maxlength="10" readonly="true" />
-        			</td>
-        		</tr>
-    		</c:if> --%>
+    		<tbody>
+    		<c:if test="${registerFlag == 'modify'}">
     		<tr>
     			<td ><label for="depName">부서코드</label></td>
     			<td >
@@ -122,6 +115,16 @@
     				&nbsp;
     			</td>
     		</tr>
+    		</c:if>
+    		<c:if test="${registerFlag == 'create'}">
+    		<tr>
+    			<td ><label for="depName">부서코드</label></td>
+    			<td >
+    				<form:input path="depCode" value="등록시자동지정" maxlength="30" cssClass="essentiality" readonly="true" id="calendar" name="calendar" />
+    				&nbsp;
+    			</td>
+    		</tr>
+    		</c:if>
     		<tr>
     			<td ><label for="depName">부서명</label></td>
     			<td >
@@ -165,7 +168,7 @@
     			</td>
     		</tr>
     		
-    		
+    		</tbody>
     	</table>
       </div>
     	<div class="align_c mgt10">

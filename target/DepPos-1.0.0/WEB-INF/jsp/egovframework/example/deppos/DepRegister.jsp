@@ -27,7 +27,7 @@
     <title>부서 <c:if test="${registerFlag == 'create'}">등록</c:if>
                   <c:if test="${registerFlag == 'modify'}">수정</c:if>
     </title>
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/style.css'/>"/>
     
     <!--For Commons Validator Client Side-->
     <script type="text/javascript" src="<c:url value='/cmmn/validator.do'/>"></script>
@@ -85,53 +85,58 @@
        
     </script>
 </head>
-<body style="text-align:center; margin:0 auto; display:inline; padding-top:100px;">
+<body>
 
 <form:form commandName="depVO" id="detailForm" name="detailForm">
-    <div id="content_pop">
+    <div id="container">
     	<!-- 타이틀 -->
     	<div id="title">
     		<ul>
-    			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/>
-                    <c:if test="${registerFlag == 'create'}"><spring:message code="button.create" /></c:if>
-                    <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if>
+    			<li>
+
+                    <c:if test="${registerFlag == 'create'}"><h4 class="sub_depth01">글쓰기</h4></c:if>
+                    <c:if test="${registerFlag == 'modify'}"><h4 class="sub_depth01">글수정</h4></c:if>
                 </li>
     		</ul>
     	</div>
     	<!-- // 타이틀 -->
-    	<div id="table">
-    	<table width="100%" border="1" cellpadding="0" cellspacing="0" style="bordercolor:#D3E2EC; bordercolordark:#FFFFFF; BORDER-TOP:#C2D0DB 2px solid; BORDER-LEFT:#ffffff 1px solid; BORDER-RIGHT:#ffffff 1px solid; BORDER-BOTTOM:#C2D0DB 1px solid; border-collapse: collapse;">
+    	<div id="content">
+    	<table class="tbl_board_write" style="width:60.8%">
     		<colgroup>
-    			<col width="150"/>
-    			<col width="?"/>
+    			<col width="80"/>
+    			<col width="200"/>
     		</colgroup>
-    		<%-- <c:if test="${registerFlag == 'modify'}">
-        		<tr>
-        			<td class="tbtd_caption"><label for="depCode">부서코드</label></td>
-        			<td class="tbtd_content">
-        				<form:input path="depCode" cssClass="essentiality" maxlength="10" readonly="true" />
-        			</td>
-        		</tr>
-    		</c:if> --%>
+    		<tbody>
+    		<c:if test="${registerFlag == 'modify'}">
     		<tr>
-    			<td class="tbtd_caption"><label for="depName">부서코드</label></td>
-    			<td class="tbtd_content">
-    				<form:input path="depCode" maxlength="30" cssClass="essentiality" readonly="true" />
+    			<td ><label for="depName">부서코드</label></td>
+    			<td >
+    				<form:input path="depCode" maxlength="30" cssClass="essentiality" readonly="true" id="calendar" name="calendar" />
     				&nbsp;
     			</td>
     		</tr>
+    		</c:if>
+    		<c:if test="${registerFlag == 'create'}">
     		<tr>
-    			<td class="tbtd_caption"><label for="depName">부서명</label></td>
-    			<td class="tbtd_content">
-    				<form:input path="depName" maxlength="30" cssClass="txt"/>
+    			<td ><label for="depName">부서코드</label></td>
+    			<td >
+    				<form:input path="depCode" value="등록시자동지정" maxlength="30" cssClass="essentiality" readonly="true" id="calendar" name="calendar" />
+    				&nbsp;
+    			</td>
+    		</tr>
+    		</c:if>
+    		<tr>
+    			<td ><label for="depName">부서명</label></td>
+    			<td >
+    				<form:input path="depName" maxlength="30" id="title" class="input" style="width:60.8%" cssClass="txt"/>
     				&nbsp;<form:errors path="depName" />
     			</td>
     		</tr>
     		<tr>
-    			<td class="tbtd_caption"><label for="depUpde">상위부서명</label></td>
-    			<td class="tbtd_content">
+    			<td ><label for="depUpde">상위부서명</label></td>
+    			<td >
 
-    				<form:select path="depUpde" id="catchDepList">
+    				<form:select path="depUpde" id="catchDepList" style="width:130px">
     					<form:option value=''>&nbsp;</form:option>
     					<c:forEach items="${catchDepList}" var="catchDep">
     					<form:option value="${catchDep.depCode}">
@@ -145,14 +150,14 @@
     			</td>
     		</tr>
     		<tr>
-    			<td class="tbtd_caption"><label for="depNote">비고</label></td>
-    			<td class="tbtd_content">
+    			<td ><label for="depNote">비고</label></td>
+    			<td >
     				<form:textarea path="depNote" rows="5" cols="58" />&nbsp;
                 </td>
     		</tr>
     		<tr>
-    			<td class="tbtd_caption"><label for="depUse">사용여부</label></td>
-    			<td class="tbtd_content">
+    			<td ><label for="depUse">사용여부</label></td>
+    			<td >
     				<form:radiobutton path="depUse" value="Y" checked="checked"/>&nbsp; 사용 		
     				<form:radiobutton path="depUse" value="N"/>&nbsp; 미사용 
     				
@@ -163,26 +168,24 @@
     			</td>
     		</tr>
     		
-    		
+    		</tbody>
     	</table>
       </div>
-    	<div id="sysbtn">
-    		<ul>
-    			<li>
-                    <span class="btn_blue_l">
-                        <a href="javascript:fn_dep_selectList();">목록</a>
-                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+    	<div class="align_c mgt10">
+
+                    <span>
+                        <a href="javascript:fn_dep_selectList();"  class="btn_white">목록</a>
+                        
                     </span>
-                </li>
-    			<li>
-                    <span class="btn_blue_l">
-                        <a href="javascript:fn_dep_save();">
+
+                    <span>
+                        <a href="javascript:fn_dep_save();" class="btn_blue">
                             <c:if test="${registerFlag == 'create'}">등록</c:if>
                             <c:if test="${registerFlag == 'modify'}">수정</c:if>
                         </a>
-                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                        
                     </span>
-                </li>
+
     			<%-- <c:if test="${registerFlag == 'modify'}">
                     <li>
                         <span class="btn_blue_l">
@@ -191,19 +194,19 @@
                         </span>
                     </li>
     			</c:if> --%>
-    			<li>
-                    <span class="btn_blue_l">
-                        <a href="javascript:document.detailForm.reset();">초기화</a>
-                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+
+                    <span>
+                        <a href="javascript:document.detailForm.reset();" class="btn_gray">초기화</a>
+                        
                     </span>
-                </li>
+     
                 <%-- <li>
                     <span class="btn_blue_l">
                         <a href="javascript:close1();">닫기</a>
                         <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li> --%>
-            </ul>
+
     	</div>
     </div>
     <!-- 검색조건 유지 -->

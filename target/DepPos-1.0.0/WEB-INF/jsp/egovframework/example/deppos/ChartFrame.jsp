@@ -6,10 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>조직도</title>
 </head>
-<frameset rows="*" cols="192,*" frameborder="Yes" border="1">
-	<frame src='DepChart.jsp' name='left' scrolling="AUTO" noresize>
-	<frame src='whois.jsp' name='center'>
-	<frame src='spec.jsp' name='right'>
+<frameset rows = "100,*" cols="*" border="1">
+	<frame src='OnlyMenu.do' name='menu'>
+<frameset rows="*" cols="300,800,*" frameborder="Yes" border="0">
+	<frame src='OnlyDepChart.do' name='left' scrolling="AUTO" noresize>
+	<frame src='whois.do' name='center' noresize>
+	<frame src='spec.do' name='right'noresize>
+</frameset>
 </frameset>
 <body>
 
